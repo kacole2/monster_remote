@@ -1,5 +1,9 @@
 class ScenesController < ApplicationController
+  
+  
   before_action :set_scene, only: [:show, :edit, :update, :destroy]
+
+  
 
   # GET /scenes
   # GET /scenes.json

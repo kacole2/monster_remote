@@ -1,13 +1,13 @@
  <header class="navbar navbar-fixed-top navbar-inverse" role="navigation" position="fixed">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "Monster Push", pushes_index_path, id: "logo" %>
+          <%= link_to "Monster Push", :home, id: "logo" %>
           <nav>
             <ul class="nav pull-right">
               <li><%= link_to "Settings",    scenes_path %></li>
             </ul>
             <ul class="nav pull-right">
-              <li><%= link_to "Help", pushes_help_path %></li>
+              <li><%= link_to "Help", :help %></li>
              </ul>
           </nav>
         </div>
