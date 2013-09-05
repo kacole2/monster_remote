@@ -1,4 +1,5 @@
 <% provide(:title, 'Sequences') %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,14 +9,14 @@
   	<div class="center hero-unit">
     <h1>Sequences</h1>
     <p>
-      <div style="float:left;margin-right:10px;margin-bottom: 10px;"><%= link_to "Scene 1", '#', class: "btn btn-large btn-primary" %> </div>
-      <div style="float:left;margin-right:10px;margin-bottom: 10px;"><%= link_to "Scene 2", '#', class: "btn btn-large btn-primary" %> </div>
-      <div style="float:left;margin-right:10px;margin-bottom: 10px;"><%= link_to "Scene 3", '#', class: "btn btn-large btn-primary" %> </div>
-      <div style="float:left;margin-right:10px;margin-bottom: 10px;"><%= link_to "Scene 4", '#', class: "btn btn-large btn-primary" %> </div>
-      <div style="float:left;margin-right:10px;margin-bottom: 10px;"><%= link_to "Scene 5", '#', class: "btn btn-large btn-primary" %> </div>
-      <div style="float:left;margin-right:10px;margin-bottom: 10px;"><%= link_to "Scene 6", '#', class: "btn btn-large btn-primary" %> </div>
-      
-    </p>
+		<% $scenes.each do |scene| %>
+      		  <% if scene.enabled == true %>
+      		  	<div style="float:left;margin-right:10px;margin-bottom: 10px;">
+      		 	<%= button_to (scene.id-1).to_s + ". " + scene.name.to_s, '#', class: "btn btn-large btn-primary" %> 
+     		  	</div>
+     		  <% end %>
+  		<% end %>
+  	</p>
     </div>
   </body>
 </html>

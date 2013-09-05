@@ -1,4 +1,6 @@
 Monster::Application.routes.draw do
+  resources :scenes
+
   get "pushes/index"
   get "pushes/sequence"
   get "pushes/contact"
