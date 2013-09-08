@@ -5,12 +5,12 @@
     <title><% :title %>	</title>
   </head>
 
-<h1>Scene Settings</h1>
+<h2>Animation Settings</h2>
 
 <body>
-	If the scene/sequence is enabled, a button will appear on the MONSTER PUSH home screen. 
-	If a scene/sequence is disabled, it removes the button from the home screen. 
-	Setting a scene/sequence to disabled does not effect the configuration of the MonsterShield.
+	If the animation/scene/sequence is enabled, a button will appear on the MonsterRemote home screen. 
+	If animation/scene/sequence is disabled, it removes the button from the home screen. 
+	Setting animation/scene/sequence to disabled does not effect the configuration of the MonsterShield.
 		
 </body>
 <br>
@@ -29,7 +29,7 @@
   </thead>
 
   <tbody>
-    <% $scenes.each do |scene| %>
+    <% @scenes.each do |scene| %>
       <tr>
       	<td style="padding-right: 15px"><%= scene.id - 1 %></td>
         <td style="padding-right: 15px"><%= scene.name %></td>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ipdns:</strong>
+  <%= @rasberry_pi.ipdns %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @rasberry_pi.username %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @rasberry_pi.password %>
+</p>
+
+<%= link_to 'Edit', edit_rasberry_pi_path(@rasberry_pi) %> |
+<%= link_to 'Back', rasberry_pis_path %>

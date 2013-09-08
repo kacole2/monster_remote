@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130904153518) do
+ActiveRecord::Schema.define(version: 20130906190421) do
+
+  create_table "pis", force: true do |t|
+    t.string   "ipdns"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "rasberry_pis", force: true do |t|
+    t.string   "ipdns"
+    t.string   "username"
+    t.string   "password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "scenes", force: true do |t|
     t.string   "name"

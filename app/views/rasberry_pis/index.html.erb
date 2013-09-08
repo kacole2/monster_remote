@@ -1,0 +1,53 @@
+<% provide(:title, 'Settings') %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><% :title %>	</title>
+  </head>
+
+<h2>Rasberry Pi Settings</h2>
+
+<body>
+	These settings will enable you to remotely shutdown your RasberryPi. 
+	Shutting down your RasberryPi using native linux commands will minimize risk to file corruption.
+	
+</body>
+
+<br>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th style="padding-right: 15px">IP or DNS</th>
+      <th style="padding-right: 15px">Username</th>
+      <th style="padding-right: 15px">Password</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rasberry_pis.each do |rasberry_pi| %>
+      <tr>
+        <td style="padding-right: 15px"><%= rasberry_pi.ipdns %></td>
+        <td style="padding-right: 15px"><%= rasberry_pi.username %></td>
+        
+        <td style="padding-right: 15px">&#9679&#9679&#9679&#9679&#9679&#9679&#9679&#9679</td>
+        <td><%#= link_to 'Show', rasberry_pi %></td>
+        <td><%= link_to 'Edit', edit_rasberry_pi_path(rasberry_pi) %></td>
+        <td><%#= link_to 'Destroy', rasberry_pi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<div style="float:none;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning!   Are you sure?"}, :method => :post %> 
+     	</div>
+  <br>
+
+<%#= link_to 'New Rasberry pi', new_rasberry_pi_path %>
+
+</html>

@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # netssh for openinig up a tunnel to the Pi
 gem 'net-ssh'
-
+gem 'serialport'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

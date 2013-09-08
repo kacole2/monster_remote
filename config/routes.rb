@@ -1,10 +1,14 @@
 Monster::Application.routes.draw do
+  resources :rasberry_pis
+
   match '/', to: 'static_pages#home', via: 'get', as: :home
   match '/help', to: 'static_pages#help', via: 'get', as: :help
   match '/contact', to: 'static_pages#contact', via: 'get', as: :contact
   match '/about', to: 'static_pages#about', via: 'get', as: :about
   resources :scenes
-  
+  post 'rasberry_pis/shutdown' => 'rasberry_pis#shutdown', as: :shutdown_pi
+  post 'scenes/:id/invoke' => 'scenes#invokescene', as: :invoke
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

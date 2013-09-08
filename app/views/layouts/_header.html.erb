@@ -1,11 +1,18 @@
  <header class="navbar navbar-fixed-top navbar-inverse" role="navigation" position="fixed">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "Monster Push", :home, id: "logo" %>
+          <%= link_to "MonsterRemote", :home, id: "logo" %>
           <nav>
-            <ul class="nav pull-right">
-              <li><%= link_to "Settings",    scenes_path %></li>
+          	<ul class="nav pull-right">
+          	<li class="Settings">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><%= link_to "Animations",   scenes_path %></li>
+                          <li><%= link_to "Rasberry Pi",   rasberry_pis_path %></li>
+                        </ul>
+                      </li>
             </ul>
+            	
             <ul class="nav pull-right">
               <li><%= link_to "Help", :help %></li>
              </ul>

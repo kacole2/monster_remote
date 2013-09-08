@@ -1,4 +1,4 @@
-<% provide(:title, 'Sequences') %>
+<% provide(:title, 'Home') %>
 
 <!DOCTYPE html>
 <html>
@@ -7,15 +7,42 @@
   </head>
   <body>
   	<div class="center hero-unit">
-    <h1>Sequences</h1>
+    <h2>MonsterShield Animations</h2>
     <p>
-		<% $scenes.each do |scene| %>
+		<% @scenes.each do |scene| %>
       		  <% if scene.enabled == true %>
       		  	<div style="float:left;margin-right:10px;margin-bottom: 10px;">
-      		 	<%= button_to (scene.id-1).to_s + ". " + scene.name.to_s, '#', class: "btn btn-large btn-primary" %> 
+      		 	<%= button_to (scene.id-1).to_s + ". " + scene.name.to_s, invoke_path(scene), class: "btn btn-large btn-primary", :method => :post %> 
      		  	</div>
      		  <% end %>
   		<% end %>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<br>
+  		<div style="float:none;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning!   Are you sure?"}, :method => :post %> 
+     	</div>
   	</p>
     </div>
   </body>

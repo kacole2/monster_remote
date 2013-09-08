@@ -8,7 +8,7 @@ class ScenesController < ApplicationController
   # GET /scenes
   # GET /scenes.json
   def index
-    $scenes = Scene.all
+    @scenes = Scene.all
   end
     
 
@@ -64,6 +64,22 @@ class ScenesController < ApplicationController
       format.html { redirect_to scenes_url }
       format.json { head :no_content }
     end
+  end
+
+  def invokescene
+    # require 'serialport'
+    sceneid = "$T" + (params[:id].to_i-1).to_s
+    
+    #port = SerialPort.new( '/dev/ttyUSB0', 9600 )
+      
+      #Read a string from the Arduino
+      #message = port.gets
+ 
+      # Write just like any other IO device
+     #port.puts sceneid
+     puts sceneid
+     
+     redirect_to :back
   end
 
   private

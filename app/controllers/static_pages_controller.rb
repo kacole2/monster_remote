@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
-    $scenes = Scene.all
+    @scenes = Scene.all
+    @rasberry_pis = RasberryPi.all
   end
 
   def help
@@ -12,4 +13,8 @@ class StaticPagesController < ApplicationController
   def about
   end
   
+  def settings
+    @scenes = Scene.all
+    @rasberry_pis = RasberryPi.all
+  end
 end
