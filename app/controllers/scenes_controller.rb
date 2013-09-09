@@ -79,7 +79,7 @@ class ScenesController < ApplicationController
 
 =end
 
-  #This will tell a button will send a command to the arduino to start a scene
+  #This will tell a button tos send a command to the arduino to start a scene
   def invokescene
     # require 'serialport'
     sceneid = "$T" + (params[:id].to_i-1).to_s
