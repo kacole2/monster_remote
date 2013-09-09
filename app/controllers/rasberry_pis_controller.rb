@@ -33,6 +33,9 @@ class RasberryPisController < ApplicationController
 
   # POST /rasberry_pis
   # POST /rasberry_pis.json
+  # at this time, the application only supports 1 pi
+=begin
+ 
   def create
     @rasberry_pi = RasberryPi.new(rasberry_pi_params)
 
@@ -46,6 +49,9 @@ class RasberryPisController < ApplicationController
       end
     end
   end
+
+=end 
+
 
   # PATCH/PUT /rasberry_pis/1
   # PATCH/PUT /rasberry_pis/1.json
@@ -63,6 +69,9 @@ class RasberryPisController < ApplicationController
 
   # DELETE /rasberry_pis/1
   # DELETE /rasberry_pis/1.json
+  # we can't have any mistakes now, can we?
+=begin
+  
   def destroy
     @rasberry_pi.destroy
     respond_to do |format|
@@ -70,6 +79,9 @@ class RasberryPisController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+=end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

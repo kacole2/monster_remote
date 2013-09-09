@@ -28,6 +28,11 @@ class ScenesController < ApplicationController
 
   # POST /scenes
   # POST /scenes.json
+  
+  #remove ability to create more scenes
+=begin
+  
+ 
   def create
     @scene = Scene.new(scene_params)
 
@@ -41,6 +46,8 @@ class ScenesController < ApplicationController
       end
     end
   end
+
+=end 
 
   # PATCH/PUT /scenes/1
   # PATCH/PUT /scenes/1.json
@@ -56,8 +63,12 @@ class ScenesController < ApplicationController
     end
   end
 
+  
   # DELETE /scenes/1
   # DELETE /scenes/1.json
+  # we can't have any mistakes
+=begin
+  
   def destroy
     @scene.destroy
     respond_to do |format|
@@ -66,6 +77,9 @@ class ScenesController < ApplicationController
     end
   end
 
+=end
+
+  #This will tell a button will send a command to the arduino to start a scene
   def invokescene
     # require 'serialport'
     sceneid = "$T" + (params[:id].to_i-1).to_s
