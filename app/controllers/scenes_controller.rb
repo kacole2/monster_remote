@@ -1,9 +1,6 @@
 class ScenesController < ApplicationController
-  
-  
-  before_action :set_scene, only: [:show, :edit, :update, :destroy]
 
-  
+  before_action :set_scene, only: [:show, :edit, :update, :destroy]
 
   # GET /scenes
   # GET /scenes.json
@@ -11,7 +8,6 @@ class ScenesController < ApplicationController
     @scenes = Scene.all
   end
     
-
   # GET /scenes/1
   # GET /scenes/1.json
   def show
@@ -84,6 +80,18 @@ class ScenesController < ApplicationController
     # require 'serialport'
     sceneid = "$T" + (params[:id].to_i-1).to_s
     
+    if (params[:id].to_i-1).to_s == "10"
+        sceneid = "$TA"
+     elsif (params[:id].to_i-1).to_s == "11"
+        sceneid = "$TB"
+     elsif (params[:id].to_i-1).to_s == "12"
+        sceneid = "$TC"
+     elsif (params[:id].to_i-1).to_s == "13"
+        sceneid = "$TD"
+     elsif (params[:id].to_i-1).to_s == "14"
+        sceneid = "$TE"
+    end
+    
     #port = SerialPort.new( '/dev/ttyUSB0', 9600 )
       
       #Read a string from the Arduino
@@ -94,6 +102,14 @@ class ScenesController < ApplicationController
      puts sceneid
      
      redirect_to :back
+  end
+  
+  def stop_animation
+    port = SerialPort.new( '/dev/ttyUSB0', 9600 )
+    
+    #Write just like any other IO device
+    port.puts "@*"
+    redirect_to :back
   end
 
   private

@@ -16,6 +16,7 @@
      		  	</div>
      		  <% end %>
   		<% end %>
+  	</p>	
   		<br>
   		<br>
   		<br>
@@ -24,26 +25,20 @@
   		<br>
   		<br>
   		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
+ 	
+  	<p>
   		<div style="float:none;margin-right:10px;margin-bottom: 10px;">
-      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning!   Are you sure?"}, :method => :post %> 
+      			<%= button_to "Stop Animation", :stop_animation, class: "btn btn-large btn-danger", data: { confirm: "Are you sure?"}, :method => :post %> 
+     	</div>
+    </p>
+  		<br>
+  		<br>
+	<p>	
+  		<div style="float:none;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning! Are you sure?"}, :method => :post %> 
      	</div>
   	</p>
+  	
     </div>
   </body>
 </html>

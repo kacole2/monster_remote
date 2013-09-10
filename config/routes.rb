@@ -8,6 +8,7 @@ Monster::Application.routes.draw do
   resources :scenes
   post 'rasberry_pis/shutdown' => 'rasberry_pis#shutdown', as: :shutdown_pi
   post 'scenes/:id/invoke' => 'scenes#invokescene', as: :invoke
+  post 'scenes/stop_animation' => 'scenes#stop_animation', as: :stop_animation
 
   
   # The priority is based upon order of creation: first created -> highest priority.
