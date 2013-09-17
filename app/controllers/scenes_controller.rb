@@ -4,12 +4,19 @@ class ScenesController < ApplicationController
 
   # GET /scenes
   # GET /scenes.json
+  
   def index
     
     @comsettings = Comsetting.all
-    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
+    #port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     port.write("@O")
-    port.read_timeout = 5000
+    port.read_timeout = 4000
     garbagescenes = port.read.to_s
     @monsterscenes = garbagescenes.delete "$O"
     
@@ -26,6 +33,7 @@ class ScenesController < ApplicationController
       #  puts "I'M FALSE"
         scene.enabled = false
         scene.save
+      end
       end
     end
   end
@@ -89,17 +97,23 @@ class ScenesController < ApplicationController
                   @scenenumber = "E" 
               end
             
-            @comsettings = Comsetting.all
+        @comsettings = Comsetting.all
+           
+           begin
             port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+           rescue
+            redirect_to :changecomsettings
+           else
             
-           if @scene.enabled
-             port.write("@+" + @scenenumber.to_s)
-            else
-             port.write("@-" + @scenenumber.to_s)
-            end
+              if @scene.enabled
+                port.write("@+" + @scenenumber.to_s)
+              else
+                port.write("@-" + @scenenumber.to_s)
+              end
         
         format.html { redirect_to @scene, notice: 'Scene was successfully updated.' }
         format.json { head :no_content }
+           end
       else
         format.html { render action: 'edit' }
         format.json { render json: @scene.errors, status: :unprocessable_entity }
@@ -139,38 +153,101 @@ class ScenesController < ApplicationController
      elsif (params[:id].to_i-1).to_s == "14"
         sceneid = "@TE"
     end
+    
     @comsettings = Comsetting.all
-    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
     port.puts sceneid
     write_timeout=3000
     redirect_to :back 
-      
+    end
+    
   end
   
   def stop_animation
     @comsettings = Comsetting.all
-    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
     port.write("@*")
     write_timeout=3000
     redirect_to :back
+    end
   end
 
   def stop_ambient
     @comsettings = Comsetting.all
-    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
     port.write("@A0")
     write_timeout=3000
     read_timeout=3000
     redirect_to :back
+    end
   end
   
   def start_ambient
     @comsettings = Comsetting.all
-    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
     port.write("@A1")
     write_timeout=3000
     read_timeout=3000
     redirect_to :back
+    end
+  end
+  
+  def sequential_mode
+    @comsettings = Comsetting.all
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
+    port.write("@P0")
+    write_timeout=3000
+    read_timeout=3000
+    redirect_to :back
+    end
+  end
+  
+  def single_mode
+    @comsettings = Comsetting.all
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
+    port.write("@P2")
+    write_timeout=3000
+    read_timeout=3000
+    redirect_to :back
+    end
+  end
+  
+  def random_mode
+    @comsettings = Comsetting.all
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
+    port.write("@P1")
+    write_timeout=3000
+    read_timeout=3000
+    redirect_to :back
+    end
   end
   
   private

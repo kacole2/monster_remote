@@ -5,14 +5,14 @@
     <title><% :title %>	</title>
   </head>
 
-<h2>Rasberry Pi Settings</h2>
+<h2>WebServer Settings</h2>
 
 <body>
-	These settings will enable you to remotely shutdown your RasberryPi. 
-	Shutting down your RasberryPi using native linux commands will minimize risk to file corruption.
+	The settings will enable you to remotely shutdown a Rasberry Pi . 
+	Shutting down your RaspberryPi using native linux commands will minimize risk to file corruption. These settings do not change or manipulate
+	the WebServer or Raspberry Pi
 	
 </body>
-
 <br>
 <br>
 <table>
@@ -43,6 +43,13 @@
 </table>
 <br>
 <br>
+<br><body>
+	The settings will change how your webserver is interacting with the MonsterShield. Set the communications port of your webserver accordingly.
+	  ttyUSB0 and ttyUSB1 are used in Raspberry Pi configurations. usbmodem are used in Mac configurations. COM are used in PC configurations.
+	   The MonsterShield baud rate is 115200 by default.
+	
+</body>
+<br>
 <br>
 	<table>
   <thead>
@@ -54,7 +61,6 @@
       <th></th>
     </tr>
   </thead>
-
   <tbody>
     <% @comsettings.each do |comsetting| %>
       <tr>

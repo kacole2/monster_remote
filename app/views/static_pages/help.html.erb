@@ -7,9 +7,21 @@
   </head>
   <body>
     <h2>HELP! Zombies are after my brains!</h2>
+    <br>
+    <br>
     <p>
-    	I'll put something here when i feel like it's necessary.
-    	
+    	<b>Why are there no buttons on the MonsterRemote home page?</b><br>
+    	The <%= link_to 'MonsterRemote', :home %> home page responds to the MonsterShield settings page. If the slots are enabled on the settings page, then you will
+    	see a button to trigger that slot on the home page. If the buttons are not appearing, go to the Settings -> MonsterShield Settings page.
+    	The MonsterShield settings page will send a call to the MonsterShield to return back which slots are enabled or disabled.
+    	If the settings page has "false" for every slot, refresh the page and then allow the MonsterShield to refresh the MonsterRemote settings.
   	</p>
+  	<br>
+	<p>
+    	<b>Why does my Pi seem slow to respond to my commands?</b><br>
+    	Well, you are running on a Raspberry Pi. It's not the Pi that's can't understand your commands, it's the MonsterShield that might be running commands
+    	 and your request got lost or is in the queue. When slot 0 is set in ambient mode, there is probably more of a chance that something got lost in the mix.
+  	</p>
+  	
   </body>
 </html>

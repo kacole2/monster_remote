@@ -5,9 +5,10 @@
     <title><% :title %>	</title>
   </head>
 
-<h2>Animation Settings</h2>
+<h2>MonsterShield Settings</h2>
 
 <body>
+	<b>Animation Settings</b><br>
 	You can edit the name of each sequence to anything of your choosing. This name will appear on the MonsterRemote homescreen.
 	If the animation/scene/sequence is enabled, a button will appear on the MonsterRemote home screen. 
 	If animation/scene/sequence is disabled, it removes the button from the home screen. 
@@ -56,16 +57,36 @@
   </tbody>
 </table>
 		
-		<br>
-  		<br>Toggle Ambient Mode on Slot 0
+<br>
+<br>
+<body><b>Ambient Settings</b><br>
+	Toggle Ambient Mode on Slot 0</body>
 	<p>	
 		<div class="row">
   			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
-      			<%= button_to "STOP Ambient Loop on Slot 0", :stop_ambient, class: "btn btn-large btn-info", data: { confirm: "Warning! Are you sure?"}, :method => :post %> 
+      			<%= button_to "STOP Ambient Loop on Slot 0", :stop_ambient, class: "btn btn-large btn-info", data: { confirm: "Are you sure?"}, :method => :post %> 
      		</div>
      	
   			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
-      			<%= button_to "START Ambient Loop on Slot 0", :start_ambient, class: "btn btn-large btn-info", data: { confirm: "Warning! Are you sure?"}, :method => :post %> 
+      			<%= button_to "START Ambient Loop on Slot 0", :start_ambient, class: "btn btn-large btn-info", data: { confirm: "Are you sure?"}, :method => :post %> 
+     		</div>
+     	</div>	
+  	</p>
+<br>
+<body><b>Playback Settings</b><br>
+	Change Playback Mode. How will the next slot be selected?</body>
+	<p>	
+		<div class="row">
+  			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "Sequential Slot Mode", :sequential_mode, class: "btn btn-large btn-info", data: { confirm: "Are you sure?"}, :method => :post %> 
+     		</div>
+     	
+  			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "Random Slot Mode", :random_mode, class: "btn btn-large btn-info", data: { confirm: "Are you sure?"}, :method => :post %> 
+     		</div>
+     		
+     		<div style="float:left;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "Single Slot Mode", :single_mode, class: "btn btn-large btn-info", data: { confirm: "Are you sure?"}, :method => :post %> 
      		</div>
      	</div>	
   	</p>

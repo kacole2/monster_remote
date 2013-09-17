@@ -14,12 +14,16 @@ class StaticPagesController < ApplicationController
 
   def about
     @comsettings = Comsetting.all
-    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    begin
+      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    rescue
+       redirect_to :changecomsettings
+    else
     port.write("@V")
     port.read_timeout = 2000
     garbageversion = port.read.to_s
     @msversion = garbageversion.delete "$VER="
-   
+    end
   end
   
   def settings

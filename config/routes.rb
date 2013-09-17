@@ -7,13 +7,16 @@ Monster::Application.routes.draw do
   match '/help', to: 'static_pages#help', via: 'get', as: :help
   match '/contact', to: 'static_pages#contact', via: 'get', as: :contact
   match '/about', to: 'static_pages#about', via: 'get', as: :about
+  match '/changecomsettings', to: 'static_pages#changecomsettings', via: 'get', as: :changecomsettings
   resources :scenes
   post 'rasberry_pis/shutdown' => 'rasberry_pis#shutdown', as: :shutdown_pi
   post 'scenes/:id/invoke' => 'scenes#invokescene', as: :invoke
   post 'scenes/stop_animation' => 'scenes#stop_animation', as: :stop_animation
   post 'scenes/stop_ambient' => 'scenes#stop_ambient', as: :stop_ambient
   post 'scenes/start_ambient' => 'scenes#start_ambient', as: :start_ambient
-
+  post 'scenes/sequential_mode' => 'scenes#sequential_mode', as: :sequential_mode
+  post 'scenes/single_mode' => 'scenes#single_mode', as: :single_mode
+  post 'scenes/random_mode' => 'scenes#random_mode', as: :random_mode
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
