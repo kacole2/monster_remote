@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906190421) do
+ActiveRecord::Schema.define(version: 20130916215725) do
+
+  create_table "comsettings", force: true do |t|
+    t.string   "comport"
+    t.integer  "baud"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pis", force: true do |t|
     t.string   "ipdns"

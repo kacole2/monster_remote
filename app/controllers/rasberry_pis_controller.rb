@@ -5,6 +5,7 @@ class RasberryPisController < ApplicationController
   # GET /rasberry_pis.json
   def index
     @rasberry_pis = RasberryPi.all
+    @comsettings = Comsetting.all
   end
 
   # GET /rasberry_pis/1
@@ -21,6 +22,7 @@ class RasberryPisController < ApplicationController
     end
 
   end
+  
   
   # GET /rasberry_pis/new
   def new
@@ -94,3 +96,5 @@ class RasberryPisController < ApplicationController
       params.require(:rasberry_pi).permit(:ipdns, :username, :password)
     end
 end
+
+

@@ -87,6 +87,7 @@ GEM
       json (>= 1.1.3)
       rdoc (~> 3.10)
     serialport (1.1.0)
+    simple_form (1.4.1)
     sprockets (2.10.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -128,6 +129,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   serialport
+  simple_form
   sqlite3
   thin
   turbolinks

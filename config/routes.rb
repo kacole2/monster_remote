@@ -1,4 +1,6 @@
 Monster::Application.routes.draw do
+  resources :comsettings
+
   resources :rasberry_pis
 
   match '/', to: 'static_pages#home', via: 'get', as: :home
@@ -9,6 +11,8 @@ Monster::Application.routes.draw do
   post 'rasberry_pis/shutdown' => 'rasberry_pis#shutdown', as: :shutdown_pi
   post 'scenes/:id/invoke' => 'scenes#invokescene', as: :invoke
   post 'scenes/stop_animation' => 'scenes#stop_animation', as: :stop_animation
+  post 'scenes/stop_ambient' => 'scenes#stop_ambient', as: :stop_ambient
+  post 'scenes/start_ambient' => 'scenes#start_ambient', as: :start_ambient
 
   
   # The priority is based upon order of creation: first created -> highest priority.

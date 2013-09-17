@@ -44,6 +44,28 @@
 <br>
 <br>
 <br>
+	<table>
+  <thead>
+    <tr>
+      <th style="padding-right: 15px">Communications Port</th>
+      <th style="padding-right: 15px">Baud Rate</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comsettings.each do |comsetting| %>
+      <tr>
+        <td style="padding-right: 15px"><%= comsetting.comport %></td>
+        <td style="padding-right: 15px"><%= comsetting.baud %></td>
+        <td style="padding-right: 15px"><%= link_to 'Edit', edit_comsetting_path(comsetting) %></td>
+        <td><%#= link_to 'Destroy', comsetting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <br>
 <br>
 	<center>

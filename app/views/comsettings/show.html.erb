@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comport:</strong>
+  <%= @comsetting.comport %>
+</p>
+
+<p>
+  <strong>Baud:</strong>
+  <%= @comsetting.baud %>
+</p>
+
+<%= link_to 'Edit', edit_comsetting_path(@comsetting) %> |
+<%= link_to 'Back', rasberry_pis_path %>

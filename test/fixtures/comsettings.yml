@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  comport: MyString
+  baud: 1
+
+two:
+  comport: MyString
+  baud: 1

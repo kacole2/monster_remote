@@ -9,34 +9,47 @@
   	<div class="center hero-unit">
     <h2>MonsterShield Animations</h2>
     <p>
+    	
 		<% @scenes.each do |scene| %>
       		  <% if scene.enabled == true %>
-      		  	<div style="float:left;margin-right:10px;margin-bottom: 10px;">
-      		 	<%= button_to (scene.id-1).to_s + ". " + scene.name.to_s, invoke_path(scene), class: "btn btn-large btn-primary", :method => :post %> 
-     		  	</div>
+      		  <% @scenenumber = scene.id - 1 %>	 
+     			 <% if (scene.id - 1).to_s == "10"
+        				@scenenumber = "A"
+     				elsif (scene.id - 1).to_s == "11"
+        				@scenenumber = "B"
+     				elsif (scene.id - 1).to_s == "12"
+        				@scenenumber = "C"
+     				elsif (scene.id - 1).to_s == "13"
+        				@scenenumber = "D"
+     				elsif (scene.id - 1).to_s == "14"
+       					@scenenumber = "E"
+    				end %>
+      		  	<div class="row-fluid">
+      		  		<div style="float:left;margin-right:10px;margin-bottom: 10px;">
+      		 			<%= button_to @scenenumber.to_s + ". " + scene.name.to_s, invoke_path(scene), class: "btn btn-large btn-primary", :method => :post %> 
+     		  		</div>
+     		  	</div>	
      		  <% end %>
   		<% end %>
   	</p>	
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
-  		<br>
- 	
+ 		<div class="row">
+ 			
+ 		</div>
   	<p>
-  		<div style="float:none;margin-right:10px;margin-bottom: 10px;">
+  		<div class="row">
+  			<div style="float:none;margin-right:10px;margin-bottom: 10px;">
       			<%= button_to "Stop Animation", :stop_animation, class: "btn btn-large btn-danger", data: { confirm: "Are you sure?"}, :method => :post %> 
-     	</div>
+     		</div>
+     	</div>		
     </p>
   		<br>
   		<br>
 	<p>	
-  		<div style="float:none;margin-right:10px;margin-bottom: 10px;">
+		<div class="row">
+  			<div style="float:none;margin-right:10px;margin-bottom: 10px;">
       			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning! Are you sure?"}, :method => :post %> 
-     	</div>
+     		</div>
+     	</div>	
   	</p>
   	
     </div>

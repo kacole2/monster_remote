@@ -5,9 +5,31 @@ class ScenesController < ApplicationController
   # GET /scenes
   # GET /scenes.json
   def index
-    @scenes = Scene.all
-  end
     
+    @comsettings = Comsetting.all
+    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    port.write("@O")
+    port.read_timeout = 3000
+    garbagescenes = port.read.to_s
+    @monsterscenes = garbagescenes.delete "$O"
+    
+    @scenes = Scene.all
+        
+    @scenes.each do |scene|
+     # puts scene.id
+      if @monsterscenes[scene.id - 1] =="1"
+       # puts "I TRUE"
+        scene.enabled = true
+        scene.save
+      else
+      #elsif @monsterscenes[scene.id - 1] =="0"
+      #  puts "I'M FALSE"
+        scene.enabled = false
+        scene.save
+      end
+    end
+  end
+  
   # GET /scenes/1
   # GET /scenes/1.json
   def show
@@ -20,6 +42,7 @@ class ScenesController < ApplicationController
 
   # GET /scenes/1/edit
   def edit
+    
   end
 
   # POST /scenes
@@ -48,8 +71,33 @@ class ScenesController < ApplicationController
   # PATCH/PUT /scenes/1
   # PATCH/PUT /scenes/1.json
   def update
+
     respond_to do |format|
+     
       if @scene.update(scene_params)
+            
+            @scenenumber = @scene.id - 1
+              if (@scene.id - 1).to_s == "10"      
+                 @scenenumber = "A"  
+              elsif (@scene.id - 1).to_s == "11"
+                 @scenenumber = "B"
+              elsif (@scene.id - 1).to_s == "12"
+                 @scenenumber = "C"
+              elsif (@scene.id - 1).to_s == "13"
+                 @scenenumber = "D"
+              elsif (@scene.id - 1).to_s == "14"
+                  @scenenumber = "E" 
+              end
+            
+            @comsettings = Comsetting.all
+            port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+            
+           if @scene.enabled
+             port.write("@+" + @scenenumber.to_s)
+            else
+             port.write("@-" + @scenenumber.to_s)
+            end
+        
         format.html { redirect_to @scene, notice: 'Scene was successfully updated.' }
         format.json { head :no_content }
       else
@@ -78,40 +126,50 @@ class ScenesController < ApplicationController
   #This will tell a button tos send a command to the arduino to start a scene
   def invokescene
     # require 'serialport'
-    sceneid = "$T" + (params[:id].to_i-1).to_s
+    sceneid = "@T" + (params[:id].to_i-1).to_s
     
     if (params[:id].to_i-1).to_s == "10"
-        sceneid = "$TA"
+        sceneid = "@TA"
      elsif (params[:id].to_i-1).to_s == "11"
-        sceneid = "$TB"
+        sceneid = "@TB"
      elsif (params[:id].to_i-1).to_s == "12"
-        sceneid = "$TC"
+        sceneid = "@TC"
      elsif (params[:id].to_i-1).to_s == "13"
-        sceneid = "$TD"
+        sceneid = "@TD"
      elsif (params[:id].to_i-1).to_s == "14"
-        sceneid = "$TE"
+        sceneid = "@TE"
     end
-    
-    #port = SerialPort.new( '/dev/ttyUSB0', 9600 )
+    @comsettings = Comsetting.all
+    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    port.puts sceneid
+    redirect_to :back 
       
-      #Read a string from the Arduino
-      #message = port.gets
- 
-      # Write just like any other IO device
-     #port.puts sceneid
-     puts sceneid
-     
-     redirect_to :back
   end
   
   def stop_animation
-    port = SerialPort.new( '/dev/ttyUSB0', 9600 )
+    @comsettings = Comsetting.all
+    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    port.write("@*")
     
-    #Write just like any other IO device
-    port.puts "@*"
     redirect_to :back
   end
 
+  def stop_ambient
+    @comsettings = Comsetting.all
+    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    port.write("@A0")
+    
+    redirect_to :back
+  end
+  
+  def start_ambient
+    @comsettings = Comsetting.all
+    port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    port.write("@A1")
+    
+    redirect_to :back
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_scene

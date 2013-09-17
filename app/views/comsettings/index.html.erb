@@ -1,0 +1,29 @@
+<h1>Listing comsettings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Communications Port</th>
+      <th>Baud Rate</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comsettings.each do |comsetting| %>
+      <tr>
+        <td><%= comsetting.comport %></td>
+        <td><%= comsetting.baud %></td>
+        <td><%= link_to 'Show', comsetting %></td>
+        <td><%= link_to 'Edit', edit_comsetting_path(comsetting) %></td>
+        <td><%#= link_to 'Destroy', comsetting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%#= link_to 'New Comsetting', new_comsetting_path %>

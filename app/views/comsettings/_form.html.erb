@@ -1,0 +1,18 @@
+<%= simple_form_for(@comsetting) do |f| %>
+  <% if @comsetting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comsetting.errors.count, "error") %> prohibited this comsetting from being saved:</h2>
+
+      <ul>
+      <% @comsetting.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= f.input :comport, collection: ['/dev/ttyUSB0','/dev/ttyUSB1','/dev/tty.usbmodemfa141','/dev/tty.usbmodemfd131'] %>
+  <%= f.input :baud, collection: [115200,57600,38400,28800,19200,14400,9600,4800,2400,1200,300]  %>
+  <%= f.submit 'Save' %>
+<% end %>

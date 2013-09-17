@@ -8,9 +8,10 @@
 <h2>Animation Settings</h2>
 
 <body>
+	You can edit the name of each sequence to anything of your choosing. This name will appear on the MonsterRemote homescreen.
 	If the animation/scene/sequence is enabled, a button will appear on the MonsterRemote home screen. 
 	If animation/scene/sequence is disabled, it removes the button from the home screen. 
-	Setting animation/scene/sequence to disabled does not effect the configuration of the MonsterShield.
+	Setting animation/scene/sequence to enabled or disabled will change the configuration of the MonsterShield for that particular slot.
 		
 </body>
 <br>
@@ -31,8 +32,21 @@
   <tbody>
     <% @scenes.each do |scene| %>
       <tr>
-      	<td style="padding-right: 15px"><%= scene.id - 1 %></td>
+      <% @scenenumber = scene.id - 1 %>	 
+      <% if (scene.id - 1).to_s == "10"
+        @scenenumber = "A"
+     elsif (scene.id - 1).to_s == "11"
+        @scenenumber = "B"
+     elsif (scene.id - 1).to_s == "12"
+        @scenenumber = "C"
+     elsif (scene.id - 1).to_s == "13"
+        @scenenumber = "D"
+     elsif (scene.id - 1).to_s == "14"
+        @scenenumber = "E"
+    end %>
+      	<td style="padding-right: 15px"><%= @scenenumber %></td>
         <td style="padding-right: 15px"><%= scene.name %></td>
+        
         <td style="padding-right: 15px"><%= scene.enabled %></td>
         <td><%#= link_to 'Show', scene %></td>
         <td><%= link_to 'Edit', edit_scene_path(scene) %></td>
@@ -41,7 +55,20 @@
     <% end %>
   </tbody>
 </table>
-
+		
+		<br>
+  		<br>Toggle Ambient Mode on Slot 0
+	<p>	
+		<div class="row">
+  			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "STOP Ambient Loop on Slot 0", :stop_ambient, class: "btn btn-large btn-info", data: { confirm: "Warning! Are you sure?"}, :method => :post %> 
+     		</div>
+     	
+  			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
+      			<%= button_to "START Ambient Loop on Slot 0", :start_ambient, class: "btn btn-large btn-info", data: { confirm: "Warning! Are you sure?"}, :method => :post %> 
+     		</div>
+     	</div>	
+  	</p>
 <br>
 
 <%#= link_to 'New Scene', new_scene_path %>
