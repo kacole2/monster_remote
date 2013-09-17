@@ -9,7 +9,7 @@ class ScenesController < ApplicationController
     @comsettings = Comsetting.all
     port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     port.write("@O")
-    port.read_timeout = 3000
+    port.read_timeout = 5000
     garbagescenes = port.read.to_s
     @monsterscenes = garbagescenes.delete "$O"
     
@@ -142,6 +142,7 @@ class ScenesController < ApplicationController
     @comsettings = Comsetting.all
     port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     port.puts sceneid
+    write_timeout=3000
     redirect_to :back 
       
   end
@@ -150,7 +151,7 @@ class ScenesController < ApplicationController
     @comsettings = Comsetting.all
     port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     port.write("@*")
-    
+    write_timeout=3000
     redirect_to :back
   end
 
@@ -158,7 +159,8 @@ class ScenesController < ApplicationController
     @comsettings = Comsetting.all
     port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     port.write("@A0")
-    
+    write_timeout=3000
+    read_timeout=3000
     redirect_to :back
   end
   
@@ -166,7 +168,8 @@ class ScenesController < ApplicationController
     @comsettings = Comsetting.all
     port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     port.write("@A1")
-    
+    write_timeout=3000
+    read_timeout=3000
     redirect_to :back
   end
   
