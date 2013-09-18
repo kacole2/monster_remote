@@ -1,12 +1,12 @@
 class ScenesController < ApplicationController
 
   before_action :set_scene, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /scenes
   # GET /scenes.json
   
   def index
-    
+    @singlescenes = Singlescene.all
     @comsettings = Comsetting.all
 
     begin
@@ -222,19 +222,6 @@ class ScenesController < ApplicationController
     end
   end
   
-  def single_mode
-    @comsettings = Comsetting.all
-    begin
-      port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
-    rescue
-       redirect_to :changecomsettings
-    else
-    port.write("@P2")
-    write_timeout=3000
-    read_timeout=3000
-    redirect_to :back
-    end
-  end
   
   def random_mode
     @comsettings = Comsetting.all

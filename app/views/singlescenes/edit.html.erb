@@ -1,0 +1,23 @@
+<% provide(:title, 'Edit Single Slot Mode') %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><% :title %>	</title>
+  </head>
+  <body>
+    <h2>Edit Single Slot Mode</h2>
+    <p>
+    Only enabled slots can be chosen. If you do not see you slot available, go the <%= link_to 'MonsterShield settings', scenes_path %> page to enable the slot.
+    <br>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @singlescene %> |
+<%= link_to 'Back', scenes_path %> |
+<%= link_to 'MonsterRemote Home', :home %>
+	</p>
+  	
+
+  </body>
+</html>

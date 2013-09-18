@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130916215725) do
+ActiveRecord::Schema.define(version: 20130918140932) do
 
   create_table "comsettings", force: true do |t|
     t.string   "comport"
@@ -37,6 +37,12 @@ ActiveRecord::Schema.define(version: 20130916215725) do
   create_table "scenes", force: true do |t|
     t.string   "name"
     t.boolean  "enabled"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "singlescenes", force: true do |t|
+    t.string   "slot"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

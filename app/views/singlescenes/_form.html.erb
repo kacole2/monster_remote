@@ -1,0 +1,33 @@
+<%= simple_form_for(@singlescene) do |f| %>
+  <%= f.error_notification %>
+		
+		
+    	<% @scenes = Scene.all %>
+		<% slotarray=[] %>
+		<% @scenes.each do |scene| %>
+      		  <% if scene.enabled == true %>
+      		  	<% scenenumber = scene.id - 1 %>	 
+     			 <% if (scene.id - 1).to_s == "10"
+        				scenenumber = "A"
+     				elsif (scene.id - 1).to_s == "11"
+        				scenenumber = "B"
+     				elsif (scene.id - 1).to_s == "12"
+        				scenenumber = "C"
+     				elsif (scene.id - 1).to_s == "13"
+        				scenenumber = "D"
+     				elsif (scene.id - 1).to_s == "14"
+       					scenenumber = "E"
+    				end %>
+    			<% slotarray << scenenumber.to_s + ". " + scene.name.to_s %>
+           <% end %>              
+     <% end %>
+     			
+  <div class="inputs">
+    <%= f.input :slot, collection: slotarray, include_blank: false  %>
+  </div>
+	 
+  <div class="actions">
+    <%= f.submit 'Save and Submit Single Mode to MonsterShield' %>
+    
+  </div>
+<% end %>

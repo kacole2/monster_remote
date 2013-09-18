@@ -1,0 +1,2 @@
+module SinglescenesHelper
+end

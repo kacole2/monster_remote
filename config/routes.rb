@@ -1,4 +1,6 @@
 Monster::Application.routes.draw do
+  resources :singlescenes
+
   resources :comsettings
 
   resources :rasberry_pis
@@ -15,7 +17,7 @@ Monster::Application.routes.draw do
   post 'scenes/stop_ambient' => 'scenes#stop_ambient', as: :stop_ambient
   post 'scenes/start_ambient' => 'scenes#start_ambient', as: :start_ambient
   post 'scenes/sequential_mode' => 'scenes#sequential_mode', as: :sequential_mode
-  post 'scenes/single_mode' => 'scenes#single_mode', as: :single_mode
+  get 'singlescenes/1/edit' => 'singlescenes#edit', as: :single_mode
   post 'scenes/random_mode' => 'scenes#random_mode', as: :random_mode
   
   # The priority is based upon order of creation: first created -> highest priority.

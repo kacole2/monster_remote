@@ -8,7 +8,7 @@
 <h2>MonsterShield Settings</h2>
 
 <body>
-	<b>Animation Settings</b><br>
+	<b>Slot Settings</b><br>
 	You can edit the name of each sequence to anything of your choosing. This name will appear on the MonsterRemote homescreen.
 	If the animation/scene/sequence is enabled, a button will appear on the MonsterRemote home screen. 
 	If animation/scene/sequence is disabled, it removes the button from the home screen. 
@@ -86,7 +86,7 @@
      		</div>
      		
      		<div style="float:left;margin-right:10px;margin-bottom: 10px;">
-      			<%= button_to "Single Slot Mode", :single_mode, class: "btn btn-large btn-info", data: { confirm: "Are you sure?"}, :method => :post %> 
+      			<%= button_to "Single Slot Mode", :single_mode, class: "btn btn-large btn-info", :method => :get %> 
      		</div>
      	</div>	
   	</p>
