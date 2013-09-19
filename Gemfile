@@ -6,8 +6,6 @@ gem 'rails', '4.0.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 
-# it's a tiny webserver!
-gem 'thin'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -23,7 +21,10 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # netssh for openinig up a tunnel to the Pi
 gem 'net-ssh'
+
+#used to create serialport communications from Pi to Arduino
 gem 'serialport'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
