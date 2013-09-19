@@ -3,12 +3,14 @@
 This README will be updated shortly... 
 in the meantime, you can see everything that can be done over at http://www.kendrickcoleman.com/
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The MonsterRemote is aimed at being a remote control for the MonsterShield prop controller that you can use from any mobile device. 
+Utilizing a smartphone with web browsing capabilities, you can trigger any configured animation.
 
-Things you may want to cover:
+Built with:
 
-* Ruby version
+* Ruby version = 2.0.0
+* Rails version = 4.0.0
+
 
 * System dependencies
 
