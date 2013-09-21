@@ -1,7 +1,7 @@
 <%= form_for(@rasberry_pi) do |f| %>
   <% if @rasberry_pi.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@rasberry_pi.errors.count, "error") %> prohibited this WebServer Setting from being saved:</h2>
+      <h2><%= pluralize(@rasberry_pi.errors.count, "error") %> prohibited this Raspberry Pi/Server Setting from being saved:</h2>
 
       <ul>
       <% @rasberry_pi.errors.full_messages.each do |msg| %>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :ipdns %><br>
+    <%= f.label :ipdns, "IP Address or DNS Name" %><br>
     <%= f.text_field :ipdns %>
   </div>
   <div class="field">

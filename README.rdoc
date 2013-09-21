@@ -35,24 +35,24 @@ Setup your Raspberry Pi:
 * Test connecting to your Pi via SSH from another computer.
 * Follow these instructions on installing Ruby on Rails. RPi Ruby on Rails. or follow my list for step by steps. this can all be done via SSH and we no longer need monitor support.
         - to follow these directions properly, verify you are in the /home/ director for the pi user
-        - sudo apt-get install -y git curl zlib1g-dev subversion
-        - sudo apt-get install -y openssl libreadline6-dev git-core zlib1g libssl-dev
-        - sudo apt-get install -y libyaml-dev libsqlite3-dev sqlite3
-        - sudo apt-get install -y libxml2-dev libxslt-dev
-        - sudo apt-get install -y autoconf automake libtool bison
-        - sudo apt-get install libv8-dev #not entirely sure if it's needed, but it doesn't hurt.
-        - sudo apt-get install libcurl4-openssl-dev #not entirely sure if it's needed, but it doesn't hurt.
-        - curl -L get.rvm.io | bash -s stable --ruby
-        - source ~/.rvm/scripts/rvm
-        - echo "gem: --no-ri --no-rdoc" > ~/.gemrc #run this command so no documentation is installed with the gems.
-        - gem install rails
+        sudo apt-get install -y git curl zlib1g-dev subversion
+        sudo apt-get install -y openssl libreadline6-dev git-core zlib1g libssl-dev
+        sudo apt-get install -y libyaml-dev libsqlite3-dev sqlite3
+        sudo apt-get install -y libxml2-dev libxslt-dev
+        sudo apt-get install -y autoconf automake libtool bison
+        sudo apt-get install libv8-dev #not entirely sure if it's needed, but it doesn't hurt.
+        sudo apt-get install libcurl4-openssl-dev #not entirely sure if it's needed, but it doesn't hurt.
+        curl -L get.rvm.io | bash -s stable --ruby
+        source ~/.rvm/scripts/rvm
+        echo "gem: --no-ri --no-rdoc" > ~/.gemrc #run this command so no documentation is installed with the gems.
+        gem install rails
         - It will take a few hours for this to compile on your Pi.
 
 Cool. Now your Pi is setup and ready for the application. adapting this part from a nice tutorial over at Ubuntu Hardy - Nginx, Rails, and Thin.
 
 Install MonsterRemote on the Pi
 
-    Clone the git repository containing the application.
+* Clone the git repository containing the application.
         cd /var #this will change the current directory
         sudo mkdir www #this will create a directory called www
         cd www
@@ -61,10 +61,10 @@ Install MonsterRemote on the Pi
         cd /var/www/monsterpi #change to your new directory
         rvmsudo bundle install #this will install all the necessary gems. this will take a while.
         sudo chown pi:pi /var/www/monsterpi #this will change ownership of files to the pi user
-    Create and seed the database. don't start this until you are done with step 2.
+* Create and seed the database. don't start this until you are done with step 2.
         while still in the /var/www/monsterpi directory type rvmsudo rake db:setup RAILS_ENV=production
         rvmsudo rake assets:precompile RAILS_ENV=production
-    Install the Thin rails server. bootup adapted from stackoverflow
+* Install the Thin rails server. bootup adapted from stackoverflow
         gem install thin
         rvmsudo thin install
         sudo /usr/sbin/update-rc.d -f thin defaults #this updates the service to automatically start at login. but for some reason it doesn't like to start automatically on the pi.
@@ -78,9 +78,9 @@ Install MonsterRemote on the Pi
             original looks like this DAEMON=/home/pi/.rvm/gems/ruby-2.0.0-p247/bin/thin
             change the line to look like DAEMON=/home/pi/.rvm/bin/bootup_thin #ctrl+x, and then Y, to exit and save
         sudo service thin start
-    Install and configure Nginx web server
-        <tt> sudo apt-get install nginx  </tt>
-        <tt> sudo nano /etc/nginx/sites-available/monsterpi </tt>
+* Install and configure Nginx web server
+        sudo apt-get install nginx  </tt>
+        sudo nano /etc/nginx/sites-available/monsterpi </tt>
             copy and paste this into the file #make any necessary changes for hostnames and sites. ctrl+x, and then Y, to exit and save
                <tt>  upstream monsterpi {
                 server 127.0.0.1:3000;
@@ -125,7 +125,7 @@ Install MonsterRemote on the Pi
         sudo rm /etc/nginx/nginx.conf
         sudo nano /etc/nginx/nginx.conf
             copy and paste this into the file #make any necessary changes for your system. ctrl+x, and then Y, to exit and save
-               <tt>  user pi;
+                user pi;
                 worker_processes 5;
 
                 error_log /var/log/nginx.error.log;
@@ -180,11 +180,11 @@ Install MonsterRemote on the Pi
                 root html;
                 }
                 }
-                }</tt>
+                }
         sudo ln -nfs /etc/nginx/sites-available/monsterpi /etc/nginx/sites-enabled/monsterpi
-    Turn on the app and lets check it out
-      <tt>  rvmsudo /etc/init.d/thin restart
+* Turn on the app and lets check it out
+        rvmsudo /etc/init.d/thin restart
         rvmsudo /etc/init.d/nginx reload
-        rvmsudo /etc/init.d/nginx restart </tt>
+        rvmsudo /etc/init.d/nginx restart
 
 Open up a web browser to your Pi and you should see the MonsterRemote homescreen. Woohoo!... that took long enough.
