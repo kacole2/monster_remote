@@ -18,25 +18,25 @@ Some screenshots and a video(coming soon):
 
 What you need:
 
-    A MonsterShield + Arduino. You can add the expander board if you want. Order everything you need from hauntsoft.com. Jason rocks!
-    A Raspberry Pi. The raspberry pi will host your rails applications
-    Wireless dongle for the Raspberry Pi. The Raspberry Pi will need to connect to your home wi-fi network.
-    USB cable. The USB cable (often referred to as a USB printer cable) will have the square side to connect to the Arduino, and the rectangle side connects to your Raspberry Pi or Powered USB Hub.
-    Powered USB Hub for the Arduino is suggested for ample power draw.
-    You need to have some technical capability and not be scared. This won't be a cake walk. Hopefully my guide will show you how it's done.
+* A MonsterShield + Arduino. You can add the expander board if you want. Order everything you need from hauntsoft.com. Jason rocks!
+* A Raspberry Pi. The raspberry pi will host your rails applications
+* Wireless dongle for the Raspberry Pi. The Raspberry Pi will need to connect to your home wi-fi network.
+* USB cable. The USB cable (often referred to as a USB printer cable) will have the square side to connect to the Arduino, and the rectangle side connects to your Raspberry Pi or Powered USB Hub.
+* Powered USB Hub for the Arduino is suggested for ample power draw.
+* You need to have some technical capability and not be scared. This won't be a cake walk. Hopefully my guide will show you how it's done.
 
 Configure your MonsterShield
 
-Setup your MonsterShield with your MonsterShield editor program or the using the keybang board. Once the MonsterShield is setup as a normal prop controller, you can move on.
+* Setup your MonsterShield with your MonsterShield editor program or the using the keybang board. Once the MonsterShield is setup as a normal prop controller, you can move on.
 
 Setup your Raspberry Pi:
 
-    Install Raspbian on your Pi. You will probably want a class10 SD card so everything compiles and runs faster
-    During setup, configure an easy to remember hostname. Such as monsterremote or monsterpi, or monster. if you have a DNS server at home, make sure to include your FQDN. I called mine monsterpi, and will be using that in all the configurations going forward. so if you want to make it easy, name it monsterpi.
-    Setup your wireless dongle to connect to your home network. plenty of blog posts are out there to show you how to set this up depending on the type of dongle you bought.
-    Configure a static IP address on your raspberry pi's wireless connection. VERY IMPORTANT
-    Remember the username and password you use for connecting to your Pi. by default, the username is Pi. I suggest changing the password to something you can remember.
-    Test connecting to your Pi via SSH from another computer.
+* Install Raspbian on your Pi. You will probably want a class10 SD card so everything compiles and runs faster
+* During setup, configure an easy to remember hostname. Such as monsterremote or monsterpi, or monster. if you have a DNS server at home, make sure to include your FQDN. I called mine monsterpi, and will be using that in all the configurations going forward. so if you want to make it easy, name it monsterpi.
+* Setup your wireless dongle to connect to your home network. plenty of blog posts are out there to show you how to set this up depending on the type of dongle you bought.
+* Configure a static IP address on your raspberry pi's wireless connection. VERY IMPORTANT
+* Remember the username and password you use for connecting to your Pi. by default, the username is Pi. I suggest changing the password to something you can remember.
+* Test connecting to your Pi via SSH from another computer.
     Follow these instructions on installing Ruby on Rails. RPi Ruby on Rails. or follow my list for step by steps. this can all be done via SSH and we no longer need monitor support.
         to follow these directions proper
         sudo apt-get install -y git curl zlib1g-dev subversion
