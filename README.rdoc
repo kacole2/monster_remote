@@ -12,22 +12,183 @@ Built with:
 * Rails version = 4.0.0
 
 
-* System dependencies
+Without further ado, I am pleased to introduce the MonsterRemote. The MonsterRemote is aimed at being a remote control for the MonsterShield prop controller that you can use from any mobile device. Utilizing a smartphone with web browsing capabilities, you can trigger any configured animation on the MonsterShield prop controller.
 
-* Configuration
+Some screenshots and a video(coming soon):
 
-* Database creation
+What you need:
 
-* Database initialization
+    A MonsterShield + Arduino. You can add the expander board if you want. Order everything you need from hauntsoft.com. Jason rocks!
+    A Raspberry Pi. The raspberry pi will host your rails applications
+    Wireless dongle for the Raspberry Pi. The Raspberry Pi will need to connect to your home wi-fi network.
+    USB cable. The USB cable (often referred to as a USB printer cable) will have the square side to connect to the Arduino, and the rectangle side connects to your Raspberry Pi or Powered USB Hub.
+    Powered USB Hub for the Arduino is suggested for ample power draw.
+    You need to have some technical capability and not be scared. This won't be a cake walk. Hopefully my guide will show you how it's done.
 
-* How to run the test suite
+Configure your MonsterShield
 
-* Services (job queues, cache servers, search engines, etc.)
+Setup your MonsterShield with your MonsterShield editor program or the using the keybang board. Once the MonsterShield is setup as a normal prop controller, you can move on.
 
-* Deployment instructions
+Setup your Raspberry Pi:
 
-* ...
+    Install Raspbian on your Pi. You will probably want a class10 SD card so everything compiles and runs faster
+    During setup, configure an easy to remember hostname. Such as monsterremote or monsterpi, or monster. if you have a DNS server at home, make sure to include your FQDN. I called mine monsterpi, and will be using that in all the configurations going forward. so if you want to make it easy, name it monsterpi.
+    Setup your wireless dongle to connect to your home network. plenty of blog posts are out there to show you how to set this up depending on the type of dongle you bought.
+    Configure a static IP address on your raspberry pi's wireless connection. VERY IMPORTANT
+    Remember the username and password you use for connecting to your Pi. by default, the username is Pi. I suggest changing the password to something you can remember.
+    Test connecting to your Pi via SSH from another computer.
+    Follow these instructions on installing Ruby on Rails. RPi Ruby on Rails. or follow my list for step by steps. this can all be done via SSH and we no longer need monitor support.
+        to follow these directions proper
+        sudo apt-get install -y git curl zlib1g-dev subversion
+        sudo apt-get install -y openssl libreadline6-dev git-core zlib1g libssl-dev
+        sudo apt-get install -y libyaml-dev libsqlite3-dev sqlite3
+        sudo apt-get install -y libxml2-dev libxslt-dev
+        sudo apt-get install -y autoconf automake libtool bison
+        sudo apt-get install libv8-dev #not entirely sure if it's needed, but it doesn't hurt.
+        sudo apt-get install libcurl4-openssl-dev #not entirely sure if it's needed, but it doesn't hurt.
+        curl -L get.rvm.io | bash -s stable --ruby
+        source ~/.rvm/scripts/rvm
+        echo "gem: --no-ri --no-rdoc" > ~/.gemrc #run this command so no documentation is installed with the gems.
+        gem install rails
+        It will take a few hours for this to compile on your Pi.
+
+Cool. Now your Pi is setup and ready for the application. adapting this part from a nice tutorial over at Ubuntu Hardy - Nginx, Rails, and Thin.
+
+Install MonsterRemote on the Pi
+
+    Clone the git repository containing the application.
+        cd /var #this will change the current directory
+        sudo mkdir www #this will create a directory called www
+        cd www
+        sudo mkdir monsterpi #this will create a directory called monsterpi. you can name it anything you want. this will be a directory you will access. you may want to call it monsterremote or monster. i just called it monsterpi to keep it consistent with the name of the pi itself.
+        sudo git clone https://github.com/kacole2/monster_remote.git /var/www/monsterpi #in a few seconds you will see all the data for the application transfer
+        cd /var/www/monsterpi #change to your new directory
+        rvmsudo bundle install #this will install all the necessary gems. this will take a while.
+        sudo chown pi:pi /var/www/monsterpi #this will change ownership of files to the pi user
+    Create and seed the database. don't start this until you are done with step 2.
+        while still in the /var/www/monsterpi directory type rvmsudo rake db:setup RAILS_ENV=production
+        rvmsudo rake assets:precompile RAILS_ENV=production
+    Install the Thin rails server. bootup adapted from stackoverflow
+        gem install thin
+        rvmsudo thin install
+        sudo /usr/sbin/update-rc.d -f thin defaults #this updates the service to automatically start at login. but for some reason it doesn't like to start automatically on the pi.
+        rvmsudo thin config -C /etc/thin/monsterpi -c /var/www/monsterpi --servers 1 -e production #this will create a thin configurtion
+        rvm list
+            you will see a list of ruby versions installed. If you're following this guide, then you will only see one version listed, and our original installation loaded the latest version of ruby. remember your current rvm version for the next step. At the current time of this writing, mine is ruby-2.0.0-p247
+            if you know your way around ruby, and you have multiple gemsets installed then you need to perform a rvm gemset list to get your working list, otherwise, if you are following this tutorial, then we are just using the default global gemset
+        rvm wrapper ruby-2.0.0-p247 bootup thin
+        sudo nano /etc/init.d/thin
+        change the original loader
+            original looks like this DAEMON=/home/pi/.rvm/gems/ruby-2.0.0-p247/bin/thin
+            change the line to look like DAEMON=/home/pi/.rvm/bin/bootup_thin #ctrl+x, and then Y, to exit and save
+        sudo service thin start
+    Install and configure Nginx web server
+        <tt> sudo apt-get install nginx  </tt>
+        <tt> sudo nano /etc/nginx/sites-available/monsterpi </tt>
+            copy and paste this into the file #make any necessary changes for hostnames and sites. ctrl+x, and then Y, to exit and save
+               <tt>  upstream monsterpi {
+                server 127.0.0.1:3000;
+                }
+
+                server {
+                listen   80;
+                server_name  monsterpi;
+                rewrite ^/(.*) http://monsterpi.kendrickcoleman.c0m permanent;
+                }
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+                server {
+                listen   80;
+                server_name monterpi;
+
+                access_log /var/log/thin_access.log;
+                error_log /var/log/thin_error.log;
+
+                root   /var/www/monsterpi/public;
+                index  home.html;
+
+                location / {
+                proxy_set_header  X-Real-IP  $remote_addr;
+                proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+
+                if (-f $request_filename/home.html) {
+                rewrite (.*) $1/home.html break;
+                }
+
+                if (-f $request_filename.html) {
+                rewrite (.*) $1.html break;}
+
+                if (!-f $request_filename) {
+                proxy_pass http://monsterpi;
+                break;
+                }
+                }
+                }  </tt>
+        sudo rm /etc/nginx/nginx.conf
+        sudo nano /etc/nginx/nginx.conf
+            copy and paste this into the file #make any necessary changes for your system. ctrl+x, and then Y, to exit and save
+               <tt>  user pi;
+                worker_processes 5;
+
+                error_log /var/log/nginx.error.log;
+                pid /var/run/nginx.pid;
+
+                events {
+                worker_connections 1024;
+                }
+
+                http {
+                include mime.types;
+                default_type application/octet-stream;
+
+                log_format main '$remote_addr - $remote_user [$time_local] $request '
+                '"$status" $body_bytes_sent "$http_referer" '
+                '"$http_user_agent" "$http_x_forwarded_for"';
+
+                access_log /var/log/nginx.access.log main;
+
+                sendfile on;
+
+                keepalive_timeout 65;
+
+                upstream monsterpi {
+                server 127.0.0.1:3000;
+                }
+
+                server {
+                listen 80;
+                server_name monsterpi;
+
+                root /var/www/monsterpi/public;
+                location / {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header Host $http_host;
+                proxy_redirect off;
+
+                if (-f $request_filename/home.html) {
+                rewrite (.*) $1/home.html break;
+                }
+                if (-f $request_filename.html) {
+                rewrite (.*) $1.html break;
+                }
+                if (!-f $request_filename) {
+                proxy_pass http://monsterpi;
+                break;
+                }}
+
+                error_page 500 502 503 504 /50x.html;
+                location = /50x.html {
+                root html;
+                }
+                }
+                }</tt>
+        sudo ln -nfs /etc/nginx/sites-available/monsterpi /etc/nginx/sites-enabled/monsterpi
+    Turn on the app and lets check it out
+      <tt>  rvmsudo /etc/init.d/thin restart
+        rvmsudo /etc/init.d/nginx reload
+        rvmsudo /etc/init.d/nginx restart </tt>
+
+Open up a web browser to your Pi and you should see the MonsterRemote homescreen. Woohoo!... that took long enough.

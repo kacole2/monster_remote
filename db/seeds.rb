@@ -7,41 +7,25 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'open-uri'
 
-rasberrypi_list = [
-  [ "ip_or_fqdn_of_pi", "pi", "mypassword" ],
-]
-
-rasberrypi_list do |ipdns, username, password|
-  RasberryPi.create( ipdns: ipdns, username: username, password: password )
-end
 
 
-comsetting_list = [
-  [ "/dev/ttyACM0", 115200 ],
-]
+RasberryPi.create( ipdns: "ip_or_dns_of_pi", username: "pi", password: "mysecretpw" )
 
-comsetting_list do |comport, baud|
-  Comsetting.create( comport: comport, baud: baud )
-end
+Comsetting.create( comport: "/dev/ttyACM0", baud: 115200 )
 
+Scene.create( name: "Scene 00", enabled: true )
+Scene.create( name: "Scene 01", enabled: true )
+Scene.create( name: "Scene 02", enabled: true )
+Scene.create( name: "Scene 03", enabled: true )
+Scene.create( name: "Scene 04", enabled: true )
+Scene.create( name: "Scene 05", enabled: true )
+Scene.create( name: "Scene 06", enabled: true )
+Scene.create( name: "Scene 07", enabled: true )
+Scene.create( name: "Scene 08", enabled: true )
+Scene.create( name: "Scene 09", enabled: true )
+Scene.create( name: "Scene 10", enabled: true )
+Scene.create( name: "Scene 11", enabled: true )
+Scene.create( name: "Scene 12", enabled: true )
+Scene.create( name: "Scene 13", enabled: true )
+Scene.create( name: "Scene 14", enabled: true )
 
-scene_list = [
-  [ "Scene 00", true ],
-  [ "Scene 01", true ],
-  [ "Scene 02", true ],
-  [ "Scene 03", true ],
-  [ "Scene 05", true ],
-  [ "Scene 06", true ],
-  [ "Scene 07", true ],
-  [ "Scene 08", true ],
-  [ "Scene 09", true ],
-  [ "Scene 10", true ],
-  [ "Scene 11", true ],
-  [ "Scene 12", true ],
-  [ "Scene 13", true ],
-  [ "Scene 14", true ],
-]
-
-scene_list do |name, enabled|
-  Scene.create( name: name, enabled: enabled )
-end
