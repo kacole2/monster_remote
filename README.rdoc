@@ -1,18 +1,14 @@
 == README
 
-This README will be updated shortly... 
-in the meantime, you can see everything that can be done over at http://www.kendrickcoleman.com/
+View an updated read me, with pictures and a complete tutorial at http://www.kendrickcoleman.com/
 
-The MonsterRemote is aimed at being a remote control for the MonsterShield prop controller that you can use from any mobile device. 
-Utilizing a smartphone with web browsing capabilities, you can trigger any configured animation.
+Without further ado, I am pleased to introduce the MonsterRemote. The MonsterRemote is aimed at being a remote control for the MonsterShield prop controller that you can use from any mobile device. Utilizing a smartphone with web browsing capabilities, you can trigger any configured animation on the MonsterShield prop controller.
 
 Built with:
 
 * Ruby version = 2.0.0
 * Rails version = 4.0.0
 
-
-Without further ado, I am pleased to introduce the MonsterRemote. The MonsterRemote is aimed at being a remote control for the MonsterShield prop controller that you can use from any mobile device. Utilizing a smartphone with web browsing capabilities, you can trigger any configured animation on the MonsterShield prop controller.
 
 Some screenshots and a video(coming soon):
 
@@ -37,20 +33,20 @@ Setup your Raspberry Pi:
 * Configure a static IP address on your raspberry pi's wireless connection. VERY IMPORTANT
 * Remember the username and password you use for connecting to your Pi. by default, the username is Pi. I suggest changing the password to something you can remember.
 * Test connecting to your Pi via SSH from another computer.
-    Follow these instructions on installing Ruby on Rails. RPi Ruby on Rails. or follow my list for step by steps. this can all be done via SSH and we no longer need monitor support.
-        to follow these directions proper
-        sudo apt-get install -y git curl zlib1g-dev subversion
-        sudo apt-get install -y openssl libreadline6-dev git-core zlib1g libssl-dev
-        sudo apt-get install -y libyaml-dev libsqlite3-dev sqlite3
-        sudo apt-get install -y libxml2-dev libxslt-dev
-        sudo apt-get install -y autoconf automake libtool bison
-        sudo apt-get install libv8-dev #not entirely sure if it's needed, but it doesn't hurt.
-        sudo apt-get install libcurl4-openssl-dev #not entirely sure if it's needed, but it doesn't hurt.
-        curl -L get.rvm.io | bash -s stable --ruby
-        source ~/.rvm/scripts/rvm
-        echo "gem: --no-ri --no-rdoc" > ~/.gemrc #run this command so no documentation is installed with the gems.
-        gem install rails
-        It will take a few hours for this to compile on your Pi.
+* Follow these instructions on installing Ruby on Rails. RPi Ruby on Rails. or follow my list for step by steps. this can all be done via SSH and we no longer need monitor support.
+        - to follow these directions properly, verify you are in the /home/ director for the pi user
+        - sudo apt-get install -y git curl zlib1g-dev subversion
+        - sudo apt-get install -y openssl libreadline6-dev git-core zlib1g libssl-dev
+        - sudo apt-get install -y libyaml-dev libsqlite3-dev sqlite3
+        - sudo apt-get install -y libxml2-dev libxslt-dev
+        - sudo apt-get install -y autoconf automake libtool bison
+        - sudo apt-get install libv8-dev #not entirely sure if it's needed, but it doesn't hurt.
+        - sudo apt-get install libcurl4-openssl-dev #not entirely sure if it's needed, but it doesn't hurt.
+        - curl -L get.rvm.io | bash -s stable --ruby
+        - source ~/.rvm/scripts/rvm
+        - echo "gem: --no-ri --no-rdoc" > ~/.gemrc #run this command so no documentation is installed with the gems.
+        - gem install rails
+        - It will take a few hours for this to compile on your Pi.
 
 Cool. Now your Pi is setup and ready for the application. adapting this part from a nice tutorial over at Ubuntu Hardy - Nginx, Rails, and Thin.
 
