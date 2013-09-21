@@ -10,7 +10,7 @@ Built with:
 * Rails version = 4.0.0
 
 
-Some screenshots and a video(coming soon):
+Some screenshots and a video can be found on the blog posting.
 
 What you need:
 
