@@ -12,27 +12,21 @@ class ScenesController < ApplicationController
     begin
       port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     rescue
-       redirect_to :changecomsettings
+      redirect_to :changecomsettings
     else
-    #port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
     sleep 2
     port.write("@O")
-    port.read_timeout = 4000
-    sleep 1
+    port.read_timeout = 2000
     garbagescenes = port.read.to_s
     @monsterscenes = garbagescenes.delete "$O"
     
     @scenes = Scene.all
         
       @scenes.each do |scene|
-     # puts scene.id
         if @monsterscenes[scene.id - 1] =="1"
-       # puts "I TRUE"
           scene.enabled = true
           scene.save
         else
-      #elsif @monsterscenes[scene.id - 1] =="0"
-      #  puts "I'M FALSE"
           scene.enabled = false
           scene.save
         end
