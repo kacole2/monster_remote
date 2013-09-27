@@ -18,24 +18,26 @@ class ScenesController < ApplicationController
     sleep 2
     port.write("@O")
     port.read_timeout = 4000
+    sleep 1
     garbagescenes = port.read.to_s
     @monsterscenes = garbagescenes.delete "$O"
     
     @scenes = Scene.all
         
-    @scenes.each do |scene|
+      @scenes.each do |scene|
      # puts scene.id
-      if @monsterscenes[scene.id - 1] =="1"
+        if @monsterscenes[scene.id - 1] =="1"
        # puts "I TRUE"
-        scene.enabled = true
-        scene.save
-      else
+          scene.enabled = true
+          scene.save
+        else
       #elsif @monsterscenes[scene.id - 1] =="0"
       #  puts "I'M FALSE"
-        scene.enabled = false
-        scene.save
+          scene.enabled = false
+          scene.save
+        end
       end
-      end
+      port.close
     end
   end
   
@@ -111,7 +113,7 @@ class ScenesController < ApplicationController
               else
                 port.write("@-" + @scenenumber.to_s)
               end
-        
+            port.close
         format.html { redirect_to @scene, notice: 'Scene was successfully updated.' }
         format.json { head :no_content }
            end
@@ -164,6 +166,7 @@ class ScenesController < ApplicationController
     sleep 2
     port.puts sceneid
     write_timeout=3000
+    port.close
     redirect_to :back 
     end
     
@@ -179,6 +182,7 @@ class ScenesController < ApplicationController
     sleep 2
     port.write("@*")
     write_timeout=3000
+    port.close
     redirect_to :back
     end
   end
@@ -194,6 +198,7 @@ class ScenesController < ApplicationController
     port.write("@A0")
     write_timeout=3000
     read_timeout=3000
+    port.close
     redirect_to :back
     end
   end
@@ -209,6 +214,7 @@ class ScenesController < ApplicationController
     port.write("@A1")
     write_timeout=3000
     read_timeout=3000
+    port.close
     redirect_to :back
     end
   end
@@ -224,6 +230,7 @@ class ScenesController < ApplicationController
     port.write("@P0")
     write_timeout=3000
     read_timeout=3000
+    port.close
     redirect_to :back
     end
   end
@@ -240,6 +247,7 @@ class ScenesController < ApplicationController
     port.write("@P1")
     write_timeout=3000
     read_timeout=3000
+    port.close
     redirect_to :back
     end
   end
