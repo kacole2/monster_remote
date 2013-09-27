@@ -15,6 +15,7 @@ class ScenesController < ApplicationController
        redirect_to :changecomsettings
     else
     #port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
+    sleep 2
     port.write("@O")
     port.read_timeout = 4000
     garbagescenes = port.read.to_s
@@ -104,7 +105,7 @@ class ScenesController < ApplicationController
            rescue
             redirect_to :changecomsettings
            else
-            
+            sleep 2
               if @scene.enabled
                 port.write("@+" + @scenenumber.to_s)
               else
@@ -160,6 +161,7 @@ class ScenesController < ApplicationController
     rescue
        redirect_to :changecomsettings
     else
+    sleep 2
     port.puts sceneid
     write_timeout=3000
     redirect_to :back 
@@ -174,6 +176,7 @@ class ScenesController < ApplicationController
     rescue
        redirect_to :changecomsettings
     else
+    sleep 2
     port.write("@*")
     write_timeout=3000
     redirect_to :back
@@ -187,6 +190,7 @@ class ScenesController < ApplicationController
     rescue
        redirect_to :changecomsettings
     else
+    sleep 2
     port.write("@A0")
     write_timeout=3000
     read_timeout=3000
@@ -201,6 +205,7 @@ class ScenesController < ApplicationController
     rescue
        redirect_to :changecomsettings
     else
+    sleep 2
     port.write("@A1")
     write_timeout=3000
     read_timeout=3000
@@ -215,6 +220,7 @@ class ScenesController < ApplicationController
     rescue
        redirect_to :changecomsettings
     else
+    sleep 2
     port.write("@P0")
     write_timeout=3000
     read_timeout=3000
@@ -230,6 +236,7 @@ class ScenesController < ApplicationController
     rescue
        redirect_to :changecomsettings
     else
+    sleep 2
     port.write("@P1")
     write_timeout=3000
     read_timeout=3000
