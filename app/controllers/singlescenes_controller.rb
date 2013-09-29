@@ -49,13 +49,10 @@ class SinglescenesController < ApplicationController
         
         firstchar = @singlescene.slot.first
         @comsettings = Comsetting.all
-            port = SerialPort.new(@comsettings.first.comport,@comsettings.first.baud)
-            sleep 1
-            port.write("@S" + firstchar.to_s)
-            write_timeout=3000
-            port.write("@P2")
-            write_timeout=3000
-            port.close
+        $PORT.write("@S" + firstchar.to_s)
+        sleep 2
+        $PORT.write("@P2")
+        
         format.html { redirect_to @singlescene, notice: 'Single Mode has been enabled on ' + firstchar.to_s }
         format.json { head :no_content }
       else

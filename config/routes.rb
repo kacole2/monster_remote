@@ -19,6 +19,7 @@ Monster::Application.routes.draw do
   post 'scenes/sequential_mode' => 'scenes#sequential_mode', as: :sequential_mode
   get 'singlescenes/1/edit' => 'singlescenes#edit', as: :single_mode
   post 'scenes/random_mode' => 'scenes#random_mode', as: :random_mode
+  post 'scenes/refresh_scenes' => 'scenes#refresh_scenes', as: :refresh_scenes
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

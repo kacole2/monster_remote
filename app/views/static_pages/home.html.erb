@@ -26,7 +26,7 @@
     				end %>
       		  	<div class="row-fluid">
       		  		<div style="float:left;margin-right:10px;margin-bottom: 10px;">
-      		 			<%= button_to @scenenumber.to_s + ". " + scene.name.to_s, invoke_path(scene), class: "btn btn-large btn-primary", :method => :post %> 
+      		 			<%= button_to @scenenumber.to_s + ". " + scene.name.to_s, invoke_path(scene), class: "btn btn-lg btn-primary", :method => :post %> 
      		  		</div>
      		  	</div>	
      		  <% end %>
@@ -47,7 +47,7 @@
 	<p>	
 		<div class="row">
   			<div style="float:none;margin-right:10px;margin-bottom: 10px;">
-      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning! Are you sure?"}, :method => :post %> 
+      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "             !!Warning!!\n\nThis will shutdown your server\n\n             Are you sure?"}, :method => :post %> 
      		</div>
      	</div>	
   	</p>
