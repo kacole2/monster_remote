@@ -44,6 +44,7 @@ class SinglescenesController < ApplicationController
   # PATCH/PUT /singlescenes/1
   # PATCH/PUT /singlescenes/1.json
   def update
+   begin
     respond_to do |format|
       if @singlescene.update(singlescene_params)
         
@@ -60,6 +61,11 @@ class SinglescenesController < ApplicationController
         format.json { render json: @singlescene.errors, status: :unprocessable_entity }
       end
     end
+   rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+   else   
+   end
   end
 
 =begin

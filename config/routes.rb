@@ -20,6 +20,7 @@ Monster::Application.routes.draw do
   get 'singlescenes/1/edit' => 'singlescenes#edit', as: :single_mode
   post 'scenes/random_mode' => 'scenes#random_mode', as: :random_mode
   post 'scenes/refresh_scenes' => 'scenes#refresh_scenes', as: :refresh_scenes
+  post 'rasberry_pis/reconnect_to_arduino' => 'rasberry_pis#reconnect_to_arduino', as: :reconnect_to_arduino
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

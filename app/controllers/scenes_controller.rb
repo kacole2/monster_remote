@@ -11,13 +11,15 @@ class ScenesController < ApplicationController
   end
   
   def refresh_scenes
-    sleep 2
-    $PORT.read_timeout = 2000
-    $PORT.write("@O")
-    garbagescenes = $PORT.read.to_s.chomp!
-    @monsterscenes = garbagescenes.delete "$O"
-    @scenes = Scene.all
-        
+   @scenes = Scene.all
+    begin
+      sleep 2
+      $PORT.read_timeout = 2000
+      $PORT.write("@O")
+      garbagescenes = $PORT.read.to_s.chomp!
+      @monsterscenes = garbagescenes.delete "$O"
+      
+
       @scenes.each do |scene|
         if @monsterscenes[scene.id - 1] =="1"
           scene.enabled = true
@@ -28,6 +30,11 @@ class ScenesController < ApplicationController
         end
       end
      redirect_to :back
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+    else
+    end
   end
   
   # GET /scenes/1
@@ -71,7 +78,9 @@ class ScenesController < ApplicationController
   # PATCH/PUT /scenes/1
   # PATCH/PUT /scenes/1.json
   def update
-
+   begin
+      
+    
     respond_to do |format|
      
       if @scene.update(scene_params)
@@ -88,7 +97,7 @@ class ScenesController < ApplicationController
               elsif (@scene.id - 1).to_s == "14"
                   @scenenumber = "E" 
               end
-            
+              
               if @scene.enabled
                 $PORT.write("@+" + @scenenumber.to_s)
               else
@@ -101,6 +110,11 @@ class ScenesController < ApplicationController
         format.json { render json: @scene.errors, status: :unprocessable_entity }
       end
     end
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+     else 
+   end
   end
 
   
@@ -135,49 +149,73 @@ class ScenesController < ApplicationController
      elsif (params[:id].to_i-1).to_s == "14"
         sceneid = "@TE"
     end
-
-    $PORT.write sceneid
-
-    redirect_to :back 
     
+    begin
+        $PORT.write sceneid  
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+    else
+        redirect_to :back 
+    end 
   end
   
   def stop_animation
-    
-    $PORT.write("@*")
-    redirect_to :back
-
+    begin
+        $PORT.write("@*")
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+    else
+        redirect_to :back 
+    end
   end
 
   def stop_ambient
-
-    $PORT.write("@A0")
-    sleep 1
-    $PORT.write("@*")
-    redirect_to :back
-
+    begin
+        $PORT.write("@A0")
+        sleep 1
+        $PORT.write("@*")
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+    else
+        redirect_to :back 
+    end
   end
   
   def start_ambient
-
-    $PORT.write("@A1")
-    redirect_to :back
-
+    begin
+        $PORT.write("@A1")
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+    else
+        redirect_to :back 
+    end
   end
   
   def sequential_mode
-
-    $PORT.write("@P0")
-    redirect_to :back
-
+    begin
+        $PORT.write("@P0")
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+    else
+        redirect_to :back 
+    end
   end
   
   
   def random_mode
-
-    $PORT.write("@P1")
-    redirect_to :back
-
+    begin
+        $PORT.write("@P1")
+    rescue
+        $CONNECTED = 'fail'
+        redirect_to :changecomsettings
+    else
+        redirect_to :back 
+    end
   end
   
   private

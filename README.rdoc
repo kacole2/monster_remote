@@ -1,8 +1,8 @@
 == README
 
-View an updated read me, with pictures and a complete tutorial at Introducing the MonsterRemote for the MonsterShield - http://kendrickcoleman.com/index.php/Ruby-on-Rails-Projects/introducing-the-monsterremote-for-the-monstershield.html
+Complete tutorial at Introducing the MonsterRemote for the MonsterShield - http://kendrickcoleman.com/index.php/Ruby-on-Rails-Projects/introducing-the-monsterremote-for-the-monstershield.html
 
-Without further ado, I am pleased to introduce the MonsterRemote. The MonsterRemote is aimed at being a remote control for the MonsterShield prop controller that you can use from any mobile device. Utilizing a smartphone with web browsing capabilities, you can trigger any configured animation on the MonsterShield prop controller.
+The MonsterRemote is a remote control for the MonsterShield prop controller that you can use from any mobile device. Utilizing a smartphone with web browsing capabilities, you can trigger any configured animation on the MonsterShield prop controller.
 
 Built with:
 
@@ -89,7 +89,7 @@ Install MonsterRemote on the Pi
                 server {
                 listen   80;
                 server_name  monsterpi;
-                rewrite ^/(.*) http://monsterpi.kendrickcoleman.c0m permanent;
+                rewrite ^/(.*) http://monsterpi permanent;
                 }
 
 

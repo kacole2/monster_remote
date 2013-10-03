@@ -41,6 +41,7 @@
   </tbody>
 </table>
 <br>
+
 <br>
 <br><body>
 	The settings will change how your Pi/Server is interacting with the MonsterShield. Set the communications port of your server accordingly.
@@ -72,6 +73,16 @@
   </tbody>
 </table>
 <br>
+<div class="row">
+	<div class="col-lg-4">
+    		<% if $CONNECTED == 'fail' %>
+    			<span class="label label-danger">MonsterShield Disconnected</span>			
+			<% elsif $CONNECTED == 'pass' %>
+      			<span class="label label-success">MonsterShield Connected</span>
+      		<% end %>
+      			<%= button_to "Connect MonsterShield", :reconnect_to_arduino, class: "btn btn-med btn-default", :method => :post %>
+	</div>
+</div>	
 <br>
 	<center>
 		<div style="float:center;margin-right:10px;margin-bottom: 10px;">

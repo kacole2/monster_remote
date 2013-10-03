@@ -9,7 +9,13 @@
   	<div class="center hero-unit">
     <h2>MonsterShield Animations</h2>
     <p>
-    	
+    		<% if $CONNECTED == 'fail' %>
+    			<span class="label label-danger">MonsterShield Disconnected</span>			
+			<% elsif $CONNECTED == 'pass' %>
+      			<span class="label label-success">MonsterShield Connected</span>
+      		<% end %>
+     </p>
+    	<p>
 		<% @scenes.each do |scene| %>
       		  <% if scene.enabled == true %>
       		  <% @scenenumber = scene.id - 1 %>	 
@@ -42,7 +48,6 @@
      		</div>
      	</div>		
     </p>
-  		<br>
   		<br>
 	<p>	
 		<div class="row">

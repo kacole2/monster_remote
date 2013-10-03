@@ -12,7 +12,7 @@
   <% end %>
 
 
-  <%= f.input :comport, collection: ['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyUSB0','/dev/ttyUSB1','/dev/tty.usbmodemfa141','/dev/tty.usbmodemfd131','COM3','COM4'], include_blank: false %>
+  <%= f.input :comport, collection: ['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyUSB0','/dev/ttyUSB1','/dev/tty.usbmodemfa141','/dev/tty.usbmodemfd131','COM2','COM3','COM4','COM5'], include_blank: false %>
   <%= f.input :baud, collection: [115200,57600,38400,28800,19200,14400,9600,4800,2400,1200,300], include_blank: false  %>
   <%= f.submit 'Save' %>
 <% end %>
