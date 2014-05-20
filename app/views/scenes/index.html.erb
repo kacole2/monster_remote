@@ -7,6 +7,7 @@
 
 <h2>MonsterShield Settings</h2>
 <div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <body>
 	<b>Slot Settings</b><br>
 	You can edit the name of each sequence to anything of your choosing. This name will appear on the MonsterRemote homescreen.
@@ -15,15 +16,19 @@
 	Setting animation/scene/sequence to enabled or disabled will change the configuration of the MonsterShield for that particular slot.
 		
 </body>
+	</div>
 </div>
 <p></p>
 
 	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
       			<%= button_to "Refresh Animations", :refresh_scenes, class: "btn btn-lg btn-default", data: { confirm: " Ambient mode must be turned off to continue. \n Please verify Ambient Mode is turned OFF! \n \n \n Are you sure you want to continue?"}, :method => :post %> 
      		</div>
+     	</div>
 	</div>
 <div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <table>
 	
   <thead>
@@ -63,15 +68,19 @@
     <% end %>
   </tbody>
 </table>
+</div>
 </div>		
 <br>
 <br>
 <div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <body><b>Ambient Settings</b><br>
 	Toggle (Start/Stop) Ambient Mode on Slot 0</body>
+	</div>
 </div>
 	<p>	
 		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
       			<%= button_to "STOP", :stop_ambient, class: "btn btn-lg btn-danger", data: { confirm: "STOP Ambient loop \n\nAre you sure?"}, :method => :post %> 
      		</div>
@@ -79,16 +88,20 @@
   			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
       			<%= button_to "START", :start_ambient, class: "btn btn-lg btn-success", data: { confirm: "START Ambient loop \n\nAre you sure?"}, :method => :post %> 
      		</div>
+     		</div>
      	</div>	
   	</p>
 <br>
 
 <div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <body><b>Playback Settings</b><br>
 	Change Slot Playback Mode. How will the next slot be selected?</body>
+	</div>
 </div>
 	<p>	
 		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
   			<div style="float:left;margin-right:10px;margin-bottom: 10px;">
       			<%= button_to "Sequential", :sequential_mode, class: "btn btn-lg btn-info", data: { confirm: "Use 'Sequential'\n\nAre you sure?"}, :method => :post %> 
      		</div>
@@ -99,6 +112,7 @@
      		
      		<div style="float:left;margin-right:10px;margin-bottom: 10px;">
       			<%= button_to "Single", :single_mode, class: "btn btn-lg btn-info", :method => :get %> 
+     		</div>
      		</div>
      	</div>	
   	</p>

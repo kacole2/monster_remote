@@ -74,13 +74,13 @@
 </table>
 <br>
 <div class="row">
-	<div class="col-lg-4">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     		<% if $CONNECTED == 'fail' %>
-    			<span class="label label-danger">MonsterShield Disconnected</span>			
+    			<span class="label label-danger">MonsterShield Disconnected</span>	
+    			<%= button_to "Connect MonsterShield", :reconnect_to_arduino, class: "btn btn-med btn-warning", :method => :post %>		
 			<% elsif $CONNECTED == 'pass' %>
       			<span class="label label-success">MonsterShield Connected</span>
-      		<% end %>
-      			<%= button_to "Connect MonsterShield", :reconnect_to_arduino, class: "btn btn-med btn-default", :method => :post %>
+      		<% end %>	
 	</div>
 </div>	
 <br>
