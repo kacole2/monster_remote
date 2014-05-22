@@ -1,18 +1,50 @@
-<%= simple_form_for(@comsetting) do |f| %>
-  <% if @comsetting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comsetting.errors.count, "error") %> prohibited this comsetting from being saved:</h2>
-
-      <ul>
-      <% @comsetting.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-
-  <%= f.input :comport, collection: ['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyUSB0','/dev/ttyUSB1','/dev/tty.usbmodem411','/dev/tty.usbmodem621','/dev/tty.usbmodem1d11','/dev/tty.usbmodem1421','/dev/tty.usbmodemfd121','/dev/tty.usbmodemfa141','/dev/tty.usbmodemfd131','COM2','COM3','COM4','COM5'], include_blank: false %>
-  <%= f.input :baud, collection: [115200,57600,38400,28800,19200,14400,9600,4800,2400,1200,300], include_blank: false  %>
-  <%= f.submit 'Save' %>
-<% end %>
+<!DOCTYPE html>
+		<div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="well">
+              <%= form_for @comsetting, :html => {:class => "form-horizontal"} do |f| %>
+				  <% if @comsetting.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@comsetting.errors.count, "error") %> prohibited this jumpsquare from being saved:</h2>
+				
+				      <ul>
+				      <% @comsetting.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>        
+                <fieldset>
+                  <legend>Communications Port: <%= @comsetting.comport %> @ <%= @comsetting.baud %> </legend>
+                  <div class="form-group">
+                  	<%= f.label :comport, " Choose a Communications Port:", :class => "col-lg-4 control-label" %>     
+                    <div class="col-lg-7">
+                      <%= f.select :comport, ['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyUSB0','/dev/ttyUSB1','/dev/tty.usbmodem411','/dev/tty.usbmodem621','/dev/tty.usbmodem1d11','/dev/tty.usbmodem1421','/dev/tty.usbmodemfd121','/dev/tty.usbmodemfa141','/dev/tty.usbmodemfd131','COM2','COM3','COM4','COM5'], {}, include_blank: false, :class => "form-control" %>	 
+                    </div>
+                  </div>
+                  <br>  
+                  <div class="form-group">
+                  	<%= f.label :baud, "Choose a baud rate:", :class => "col-lg-4 control-label" %>     
+                    <div class="col-lg-7">
+                      <%= f.select :baud, [115200,57600,38400,28800,19200,14400,9600,4800,2400,1200,300], {}, include_blank: false, :class => "form-control" %>	 
+                    </div>
+                  </div>                                       
+                  <center>
+	                  <div class="form-group">	                  	                  
+	                      <%= f.submit class: 'btn btn-primary'%>	                    
+	                  </div> 
+			<% end %>	                              
+	                  <%= link_to :back, class: "pull-left", :method => :get do %>
+	        			 Back
+	    			  <% end %>
+	                     
+	                  <%= link_to :home, class: "pull-right", :method => :get do %>
+	        			Home
+	    			  <% end %>       
+                  </center>
+                </fieldset>
+             
+            </div>
+          </div>
+        </div>
+</html>

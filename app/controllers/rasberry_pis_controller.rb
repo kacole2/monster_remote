@@ -59,7 +59,7 @@ class RasberryPisController < ApplicationController
   def update
     respond_to do |format|
       if @rasberry_pi.update(rasberry_pi_params)
-        format.html { redirect_to @rasberry_pi, notice: 'Rasberry pi was successfully updated.' }
+        format.html { redirect_to :rasberry_pis, notice: 'Rasberry pi was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

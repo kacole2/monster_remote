@@ -1,94 +1,78 @@
 <% provide(:title, 'Settings') %>
 <!DOCTYPE html>
-<html>
   <head>
     <title><% :title %>	</title>
   </head>
-
-<h2>Raspberry Pi/Server Settings</h2>
-
-<body>
-	These settings will enable you to remotely shutdown a Raspberry Pi or linux based machine that accepts the "shutdown" command. 
-	Shutting down your Raspberry Pi using native linux commands will minimize risk to file corruption. These settings do not change or manipulate the Raspberry Pi
-	
-</body>
-<br>
-<br>
-<table>
-  <thead>
-    <tr>
-      <th style="padding-right: 15px">IP Address or DNS Name</th>
-      <th style="padding-right: 15px">Username</th>
-      <th style="padding-right: 15px">Password</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rasberry_pis.each do |rasberry_pi| %>
-      <tr>
-        <td style="padding-right: 15px"><%= rasberry_pi.ipdns %></td>
-        <td style="padding-right: 15px"><%= rasberry_pi.username %></td>
-        
-        <td style="padding-right: 15px">&#9679&#9679&#9679&#9679&#9679&#9679&#9679&#9679</td>
-        <td><%#= link_to 'Show', rasberry_pi %></td>
-        <td><%= link_to 'Edit', edit_rasberry_pi_path(rasberry_pi) %></td>
-        <td><%#= link_to 'Destroy', rasberry_pi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-
-<br>
-<br><body>
-	The settings will change how your Pi/Server is interacting with the MonsterShield. Set the communications port of your server accordingly.
-	  ttyACM0 is usually default in Raspberry Pi configurations. ttyUSB configurations are used for linux. usbmodem are used in Mac configurations. COM are used in PC configurations. Only Raspberry Pi and Mac configurations have been tested.
-	   The MonsterShield baud rate is 115200 by default.
-	
-</body>
-<br>
-<br>
-	<table>
-  <thead>
-    <tr>
-      <th style="padding-right: 15px">Communications Port</th>
-      <th style="padding-right: 15px">Baud Rate</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @comsettings.each do |comsetting| %>
-      <tr>
-        <td style="padding-right: 15px"><%= comsetting.comport %></td>
-        <td style="padding-right: 15px"><%= comsetting.baud %></td>
-        <td style="padding-right: 15px"><%= link_to 'Edit', edit_comsetting_path(comsetting) %></td>
-        <td><%#= link_to 'Destroy', comsetting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
+  
 <div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    		<% if $CONNECTED == 'fail' %>
-    			<span class="label label-danger">MonsterShield Disconnected</span>	
-    			<%= button_to "Connect MonsterShield", :reconnect_to_arduino, class: "btn btn-med btn-warning", :method => :post %>		
-			<% elsif $CONNECTED == 'pass' %>
-      			<span class="label label-success">MonsterShield Connected</span>
-      		<% end %>	
+  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  		<br>
+  		<center><div id="notice"><span class="label label-success"><%= notice %></span></div><div id="alert"><span class="label label-danger"><%= alert %></span></div></center>
+		<center><h3>Raspberry Pi/Server Settings</h3></center>
+		<body>
+			These settings will enable you to remotely shutdown a Raspberry Pi or linux based machine that accepts the "shutdown" command. 
+			Shutting down your Raspberry Pi using native linux commands will minimize risk to file corruption. These settings do not change or manipulate the Raspberry Pi			
+			<br>
+				<table class="table table-striped table-bordered table-hover">
+	                <thead>
+	                  <tr>
+	                    <th>IP Address or DNS Name</th>
+					    <th>User</th>
+					    <th>Password</th>
+					    <th></th>
+	                  </tr>
+	                </thead>	                
+	                	<tbody>
+	                		<% @rasberry_pis.each do |rasberry_pi| %>
+							      <tr>
+							        <td><%= rasberry_pi.ipdns %></td>
+							        <td><%= rasberry_pi.username %></td>
+							        <td>&#9679&#9679&#9679&#9679&#9679&#9679&#9679&#9679</td>					        
+							        <td><%= link_to 'Edit', edit_rasberry_pi_path(rasberry_pi), method: :get, class: "btn btn-warning btn-xs" %></td>						   
+							      </tr>
+							<% end %>
+						</tbody>               
+	            </table>
+			<br>
+			<br>
+			The settings will change how your Pi/Server is interacting with the MonsterShield. Set the communications port of your server accordingly.
+			  ttyACM0 is usually default in Raspberry Pi configurations. ttyUSB configurations are used for linux. usbmodem are used in Mac configurations. COM are used in PC configurations. Only Raspberry Pi and Mac configurations have been tested.
+			   The MonsterShield baud rate is 115200 by default.
+			<br>
+				<table class="table table-striped table-bordered table-hover">
+	                <thead>
+	                  <tr>
+	                    <th>Communications Port</th>
+					    <th>Baud Rate</th>
+					    <th></th>
+	                  </tr>
+	                </thead>	                
+	                	<tbody>
+	                		<% @comsettings.each do |comsetting| %>
+							      <tr>
+							        <td><%= comsetting.comport %></td>
+							        <td><%= comsetting.baud %></td>				        
+							        <td><%= link_to 'Edit', edit_comsetting_path(comsetting), method: :get, class: "btn btn-warning btn-xs" %></td>						   
+							      </tr>
+							<% end %>
+						</tbody>               
+	            </table>
+		<br>
+		<center>
+		    		<% if $CONNECTED == 'fail' %>
+		    			<span class="label label-danger">MonsterShield Disconnected</span>	
+		    			<%= button_to "Connect MonsterShield", :reconnect_to_arduino, class: "btn btn-med btn-warning", :method => :post %>		
+					<% elsif $CONNECTED == 'pass' %>
+		      			<span class="label label-success">MonsterShield Connected</span>
+		      		<% end %>	
+		<br>
+			<div style="float:center;margin-right:10px;margin-bottom: 10px;">
+	      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning!   Are you sure?"}, :method => :post %> 
+	     	</div>
+	    </center>
+	    			
+		</body>
 	</div>
-</div>	
-<br>
-	<center>
-		<div style="float:center;margin-right:10px;margin-bottom: 10px;">
-      			<%= button_to "Shutdown Pi", shutdown_pi_path, class: "btn btn-large btn-danger", data: { confirm: "Warning!   Are you sure?"}, :method => :post %> 
-     	</div>
-    </center>
-<%#= link_to 'New Rasberry pi', new_rasberry_pi_path %>
+</div>
 
 </html>

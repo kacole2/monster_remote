@@ -46,7 +46,7 @@ class ComsettingsController < ApplicationController
   def update
     respond_to do |format|
       if @comsetting.update(comsetting_params)
-        format.html { redirect_to @comsetting, notice: 'Comsetting was successfully updated.' }
+        format.html { redirect_to :rasberry_pis, notice: 'Comsetting was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -1,33 +1,68 @@
-<%= simple_form_for(@singlescene) do |f| %>
-  <%= f.error_notification %>
-		
-		
-    	<% @scenes = Scene.all %>
-		<% slotarray=[] %>
-		<% @scenes.each do |scene| %>
-      		  <% if scene.enabled == true %>
-      		  	<% scenenumber = scene.id - 1 %>	 
-     			 <% if (scene.id - 1).to_s == "10"
-        				scenenumber = "A"
-     				elsif (scene.id - 1).to_s == "11"
-        				scenenumber = "B"
-     				elsif (scene.id - 1).to_s == "12"
-        				scenenumber = "C"
-     				elsif (scene.id - 1).to_s == "13"
-        				scenenumber = "D"
-     				elsif (scene.id - 1).to_s == "14"
-       					scenenumber = "E"
-    				end %>
-    			<% slotarray << scenenumber.to_s + ". " + scene.name.to_s %>
-           <% end %>              
-     <% end %>
-     			
-  <div class="inputs">
-    <%= f.input :slot, collection: slotarray, include_blank: false  %>
-  </div>
-	 
-  <div class="actions">
-    <%= f.submit 'Save and Submit Single Mode to MonsterShield' %>
-    
-  </div>
-<% end %>
+<!DOCTYPE html>
+		<div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="well">
+              <%= form_for @singlescene, :html => {:class => "form-horizontal"} do |f| %>
+				  <% if @singlescene.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@singlescene.errors.count, "error") %> prohibited this jumpsquare from being saved:</h2>
+				
+				      <ul>
+				      <% @singlescene.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>   
+				  
+				  <% @scenes = Scene.all %>
+					<% slotarray=[] %>
+					<% @scenes.each do |scene| %>
+			      		  <% if scene.enabled == true %>
+			      		  	<% scenenumber = scene.id - 1 %>	 
+			     			 <% if (scene.id - 1).to_s == "10"
+			        				scenenumber = "A"
+			     				elsif (scene.id - 1).to_s == "11"
+			        				scenenumber = "B"
+			     				elsif (scene.id - 1).to_s == "12"
+			        				scenenumber = "C"
+			     				elsif (scene.id - 1).to_s == "13"
+			        				scenenumber = "D"
+			     				elsif (scene.id - 1).to_s == "14"
+			       					scenenumber = "E"
+			    				end %>
+			    			<% slotarray << scenenumber.to_s + ". " + scene.name.to_s %>
+			           <% end %>              
+			     <% end %>
+				       
+                <fieldset>
+                  <legend>Configure Single Scene Mode</legend>
+                  <p>
+				    Only enabled slots can be chosen. If you do not see you slot available, go the <%= link_to 'MonsterShield settings', scenes_path %> page to enable the slot.
+				    <br>
+				  </p>
+                  <div class="form-group">
+                  	<%= f.label :slot, "Choose a Slot:", :class => "col-lg-4 control-label" %>     
+                    <div class="col-lg-7">
+                      <%= f.select :slot, slotarray, {}, include_blank: false, :class => "form-control" %>	 
+                    </div>
+                  </div>                                
+                  <center>
+	                  <div class="form-group">	                  	                  
+	                      <%= f.submit "Save and Enable Single Slot Mode", class: 'btn btn-primary'%>	                    
+	                  </div> 
+			<% end %>	                              
+	                  <%= link_to :back, class: "pull-left", :method => :get do %>
+	        			 Back
+	    			  <% end %>
+	                     
+	                  <%= link_to :home, class: "pull-right", :method => :get do %>
+	        			Home
+	    			  <% end %>       
+                  </center>
+                </fieldset>
+             
+            </div>
+          </div>
+        </div>
+</html>

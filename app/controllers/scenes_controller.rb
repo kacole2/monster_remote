@@ -103,7 +103,7 @@ class ScenesController < ApplicationController
               else
                 $PORT.write("@-" + @scenenumber.to_s)
               end
-        format.html { redirect_to @scene, notice: 'Scene was successfully updated.' }
+        format.html { redirect_to :scenes, notice: 'Scene was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -156,7 +156,10 @@ class ScenesController < ApplicationController
         $CONNECTED = 'fail'
         redirect_to :changecomsettings
     else
-        redirect_to :back 
+        respond_to do |format|
+          format.html {redirect_to :back }
+
+        end
     end 
   end
   
@@ -167,7 +170,10 @@ class ScenesController < ApplicationController
         $CONNECTED = 'fail'
         redirect_to :changecomsettings
     else
-        redirect_to :back 
+      respond_to do |format|
+        format.html { redirect_to :back, alert: 'Scene has been Stopped.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -180,7 +186,10 @@ class ScenesController < ApplicationController
         $CONNECTED = 'fail'
         redirect_to :changecomsettings
     else
-        redirect_to :back 
+      respond_to do |format|
+        format.html { redirect_to :back, alert: 'Ambient Mode has been Stopped.' }
+        format.json { head :no_content }
+      end
     end
   end
   
@@ -191,7 +200,10 @@ class ScenesController < ApplicationController
         $CONNECTED = 'fail'
         redirect_to :changecomsettings
     else
-        redirect_to :back 
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'Ambient Mode has been Started.' }
+        format.json { head :no_content }
+      end
     end
   end
   
@@ -202,7 +214,10 @@ class ScenesController < ApplicationController
         $CONNECTED = 'fail'
         redirect_to :changecomsettings
     else
-        redirect_to :back 
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'Sequential Mode has been Started.' }
+        format.json { head :no_content }
+      end
     end
   end
   
@@ -214,7 +229,10 @@ class ScenesController < ApplicationController
         $CONNECTED = 'fail'
         redirect_to :changecomsettings
     else
-        redirect_to :back 
+      respond_to do |format|
+        format.html { redirect_to :back, notice: 'Random Mode has been Started.' }
+        format.json { head :no_content }
+      end
     end
   end
   

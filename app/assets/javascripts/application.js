@@ -11,10 +11,41 @@
 // about supported directives.
 //
 //= require jquery
-//= require twitter/bootstrap
+//= require bootstrap.min
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function(){
+$(document).ready(function(){	
+	window.setInterval(function () {
+        $("#FlashModal").modal("hide");
+    }, 15000); 
+    	
+	$('#FlashModal').on('hidden.bs.modal', function () {
+    	window.location = window.location.pathname;
+	})
+	
+	jQuery(document).ready(function() {
+		sec = 15;
+		timer = setInterval(function() {
+	   	$("#mdtimer span").text(sec--);
+	   	if (sec <= 0) {
+			clearInterval("#mdtimer span");
+			sec = 15;}
+		},990);
+	}); 
+	
 });
+
+window.setTimeout(function() {
+	$("#notice").fadeTo(500, 0).slideUp(500, function(){
+	$(this).remove(); 
+	 });
+	}, 2000);
+	
+window.setTimeout(function() {
+	$("#alert").fadeTo(500, 0).slideUp(500, function(){
+	$(this).remove(); 
+	 });
+	}, 2000);
+

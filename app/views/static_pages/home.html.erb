@@ -1,13 +1,14 @@
 <% provide(:title, 'Home') %>
 
 <!DOCTYPE html>
-<html>
   <head>
     <title><% :title %>	</title>
   </head>
   <body>
-  	<div class="center hero-unit">
-    <h2>MonsterShield Animations</h2>
+  	<div class="row">
+  	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  	<center>
+    	<h3>MonsterShield Scenes</h3>
     <p>
     		<% if $CONNECTED == 'fail' %>
     			<span class="label label-danger">MonsterShield Disconnected</span>			
@@ -15,6 +16,7 @@
       			<span class="label label-success">MonsterShield Connected</span>
       		<% end %>
      </p>
+     <center><div id="notice"><span class="label label-success"><%= notice %></span></div><div id="alert"><span class="label label-danger"><%= alert %></span></div></center>
     	<p>
 		<% @scenes.each do |scene| %>
       		  <% if scene.enabled == true %>
@@ -31,9 +33,13 @@
        					@scenenumber = "E"
     				end %>
       		  	<div class="row-fluid">
-      		  		<div style="float:left;margin-right:10px;margin-bottom: 10px;">
-      		 			<%= button_to @scenenumber.to_s + ". " + scene.name.to_s, invoke_path(scene), class: "btn btn-lg btn-success", :method => :post %> 
-     		  		</div>
+      		  		<div style="float:left;margin-right:10px;margin-bottom: 10px;">     
+      		  			<% if $CONNECTED == 'fail' %>
+			    			<%= link_to @scenenumber.to_s + ". " + scene.name.to_s, invoke_path(scene), class: "btn btn-lg btn-success", :method => :post %>     			
+						<% elsif $CONNECTED == 'pass' %>
+			      			<%= link_to @scenenumber.to_s + ". " + scene.name.to_s, invoke_path(scene), {class: "btn btn-lg btn-success", :method => :post, :remote => true, 'data-toggle' =>  "modal", 'data-target' => '#FlashModal'} %>     	
+			      		<% end %>		  				  			
+     		  		</div>     	    		  		 		
      		  	</div>	
      		  <% end %>
   		<% end %>
@@ -44,7 +50,7 @@
   	<p>
   		<div class="row">
   			<div style="float:none;margin-right:10px;margin-bottom: 10px;">
-      			<%= button_to "Stop Animation", :stop_animation, class: "btn btn-large btn-danger", data: { confirm: "Are you sure?"}, :method => :post %> 
+      			<%= button_to "Stop Scene", :stop_animation, class: "btn btn-large btn-danger", data: { confirm: "Are you sure?"}, :method => :post %> 
      		</div>
      	</div>		
     </p>
@@ -56,7 +62,9 @@
      		</div>
      	</div>	
   	</p>
-  	
+  	</center>
     </div>
+    </div>
+  <%= render "static_pages/modaltimer" %>	 
   </body>
 </html>

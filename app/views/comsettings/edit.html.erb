@@ -1,22 +1,2 @@
-<% provide(:title, 'Edit Single Slot Mode') %>
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><% :title %>	</title>
-  </head>
-  <body>
-    <h2>Edit Communication Settings</h2>
-    <p>
-    Set the communications port and baud rate for the Pi/Server to talk to the Arduino.
-    <br>
-
+<br>
 <%= render 'form' %>
-
-<%= link_to 'Show', @comsetting %> |
-<%= link_to 'Back', rasberry_pis_path %>
-	</p>
-  	
-
-  </body>
-</html>

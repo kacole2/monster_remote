@@ -4,10 +4,12 @@
   <head>
     <title><% :title %>	</title>
   </head>
-
-<h2>MonsterShield Settings</h2>
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<br>
+		<center><div id="notice"><span class="label label-success"><%= notice %></span></div><div id="alert"><span class="label label-danger"><%= alert %></span></div></center>
+<center><h3>MonsterShield Settings</h3></center>
+
 <body>
 	<b>Slot Settings</b><br>
 	You can edit the name of each sequence to anything of your choosing. This name will appear on the MonsterRemote homescreen.
@@ -29,45 +31,45 @@
 	</div>
 <div class="row">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<table>
-	
-  <thead>
-    <tr>
-      <th style="padding-right: 15px">Sequence</th>
-      <th style="padding-right: 15px">Name</th>
-      <th style="padding-right: 15px">Enabled</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @scenes.each do |scene| %>
-      <tr>
-      <% @scenenumber = scene.id - 1 %>	 
-      <% if (scene.id - 1).to_s == "10"
-        @scenenumber = "A"
-     elsif (scene.id - 1).to_s == "11"
-        @scenenumber = "B"
-     elsif (scene.id - 1).to_s == "12"
-        @scenenumber = "C"
-     elsif (scene.id - 1).to_s == "13"
-        @scenenumber = "D"
-     elsif (scene.id - 1).to_s == "14"
-        @scenenumber = "E"
-    end %>
-      	<td style="padding-right: 15px"><%= @scenenumber %></td>
-        <td style="padding-right: 15px"><%= scene.name %></td>
-        
-        <td style="padding-right: 15px"><%= scene.enabled %></td>
-        <td><%#= link_to 'Show', scene %></td>
-        <td><%= link_to 'Edit', edit_scene_path(scene) %></td>
-        <td><%#= link_to 'Destroy', scene, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	<table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Sequence</th>
+				    <th>Name</th>
+				    <th>Enabled</th>
+				    <th></th>
+                  </tr>
+                </thead>
+                
+                	<tbody>
+                		<% @scenes.each do |scene| %>
+						      <tr>
+						     <% @scenenumber = scene.id - 1 %>	 
+						     <% if (scene.id - 1).to_s == "10"
+						        @scenenumber = "A"
+						     elsif (scene.id - 1).to_s == "11"
+						        @scenenumber = "B"
+						     elsif (scene.id - 1).to_s == "12"
+						        @scenenumber = "C"
+						     elsif (scene.id - 1).to_s == "13"
+						        @scenenumber = "D"
+						     elsif (scene.id - 1).to_s == "14"
+						        @scenenumber = "E"
+						    end %>
+						        <td><%= @scenenumber %></td>
+						        <td><%= scene.name %></td>
+						        <td><% if scene.enabled == true %>
+						        		<%= image_tag("greencheck.png", :alt => "Yes") %>
+						        	<% else %>
+						        		<%= image_tag("redx.png", :alt => "Yes") %>
+						        	<% end %>
+						        </td>					        
+						        <td><%= link_to 'Edit', edit_scene_path(scene), method: :get, class: "btn btn-warning btn-xs" %></td>
+						        
+						      </tr>
+						    <% end %>
+					  </tbody>               
+              </table>
 </div>
 </div>		
 <br>

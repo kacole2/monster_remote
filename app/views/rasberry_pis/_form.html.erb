@@ -1,29 +1,57 @@
-<%= form_for(@rasberry_pi) do |f| %>
-  <% if @rasberry_pi.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rasberry_pi.errors.count, "error") %> prohibited this Raspberry Pi/Server Setting from being saved:</h2>
-
-      <ul>
-      <% @rasberry_pi.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :ipdns, "IP Address or DNS Name" %><br>
-    <%= f.text_field :ipdns %>
-  </div>
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<!DOCTYPE html>
+		<div class="row">
+          <div class="col-lg-8 col-lg-offset-2">
+            <div class="well">
+              <%= form_for @rasberry_pi, :html => {:class => "form-horizontal"} do |f| %>
+				  <% if @rasberry_pi.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@rasberry_pi.errors.count, "error") %> prohibited this jumpsquare from being saved:</h2>
+				
+				      <ul>
+				      <% @rasberry_pi.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>        
+                <fieldset>
+                  <legend>Raspberry Pi: <%= @rasberry_pi.ipdns %></legend>
+                  <div class="form-group">
+                  	<%= f.label :ipdns, "IP Address or DNS Name:", :class => "col-lg-4 control-label" %>     
+                    <div class="col-lg-7">
+                      <%= f.text_field :ipdns, :class => "form-control" %>	 
+                    </div>
+                  </div>
+                  <br>  
+                  <div class="form-group">
+                  	<%= f.label :username, "Username:", :class => "col-lg-4 control-label" %>     
+                    <div class="col-lg-7">
+                      <%= f.text_field :username, :class => "form-control" %>	 
+                    </div>
+                  </div>
+                  <br>   
+                  <div class="form-group">
+                  	<%= f.label :password, "Password:", :class => "col-lg-4 control-label" %>     
+                    <div class="col-lg-7">
+                      <%= f.password_field :password, :class => "form-control" %>	 
+                    </div>
+                  </div>                                              
+                  <center>
+	                  <div class="form-group">	                  	                  
+	                      <%= f.submit class: 'btn btn-primary'%>	                    
+	                  </div> 
+			<% end %>	                              
+	                  <%= link_to :back, class: "pull-left", :method => :get do %>
+	        			 Back
+	    			  <% end %>
+	                     
+	                  <%= link_to :home, class: "pull-right", :method => :get do %>
+	        			Home
+	    			  <% end %>       
+                  </center>
+                </fieldset>
+             
+            </div>
+          </div>
+        </div>
+</html>
