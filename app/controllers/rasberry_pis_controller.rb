@@ -15,7 +15,7 @@ class RasberryPisController < ApplicationController
   
   def shutdown
     @rasberry_pis = RasberryPi.all
-    $PORT.close
+    #$PORT.close
     Net::SSH.start(@rasberry_pis.first.ipdns, @rasberry_pis.first.username, :password => @rasberry_pis.first.password) do |ssh|
       ssh.exec "sudo shutdown -h now"
     end
