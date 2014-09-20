@@ -20,12 +20,6 @@ ActiveRecord::Schema.define(version: 20130918140932) do
     t.datetime "updated_at"
   end
 
-  create_table "pis", force: true do |t|
-    t.string   "ipdns"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "rasberry_pis", force: true do |t|
     t.string   "ipdns"
     t.string   "username"
