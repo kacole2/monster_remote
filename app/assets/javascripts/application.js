@@ -15,7 +15,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
+	
+$(document).ready(function(){	
+	
 $('#FlashModal').modal({
 	"backdrop" : "static"
 });
@@ -29,8 +31,6 @@ $('#FlashModal').on('show.bs.modal', function (e) {
 			sec = 15;}
 		},990);
 });
-	
-$(document).ready(function(){	
 
 	window.setTimeout(function() {
 		$("#notice").fadeTo(500, 0).slideUp(500, function(){
