@@ -17,20 +17,18 @@
 //= require_tree .
 
 $('#FlashModal').modal({
-		"backdrop" : "static"
-	});
+	"backdrop" : "static"
+});
 
-$('#FlashModal').on('shownn.bs.modal', function (e) {
-    sec = 15;
-		
-	timer = setInterval(function() {
+$('#FlashModal').on('show.bs.modal', function (e) {
+	sec = 15;
+		timer = setInterval(function() {
 	   	$("#mdtimer span").text(sec--);
 	   	if (sec <= 0) {
 			clearInterval("#mdtimer span");
 			sec = 15;}
 		},990);
 });
-
 	
 $(document).ready(function(){	
 
