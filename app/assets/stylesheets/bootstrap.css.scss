@@ -5119,10 +5119,11 @@ body.modal-open,
 .modal-dialog {
   position: absolute;
   left: 50%;
-  margin-left: -312px;
+  margin-left: -100px;
   height: 500px;
   top: 50%;
   margin-top: -350px;
+  padding: 20px;
 }
 
 .modal-content {
