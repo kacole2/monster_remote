@@ -16,25 +16,28 @@
 //= require turbolinks
 //= require_tree .
 	
+$(function(){
+	$('#FlashModal').modal({
+		"backdrop" : "static"
+	});
+
+	$('#FlashModal').on('show.bs.modal', function (e) {
+		var count=30;
+		var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+		
+		function timer(){
+		  count=count-1;
+		  if (count <= 0)
+		  {
+		     clearInterval(counter);
+		     return;
+		  }
+		 document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+		});
+
+});	
 
 $(document).ready(function(){	
-	$('#FlashModal').modal({
-	"backdrop" : "static"
-});
-
-$('#FlashModal').on('show.bs.modal', function (e) {
-	var count=30;
-	var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-	
-	function timer(){
-	  count=count-1;
-	  if (count <= 0)
-	  {
-	     clearInterval(counter);
-	     return;
-	  }
-	 document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
-	}
 	
 	window.setTimeout(function() {
 		$("#notice").fadeTo(500, 0).slideUp(500, function(){
