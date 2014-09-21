@@ -5130,6 +5130,7 @@ body.modal-open,
 }
 
 .modal-dialog {
+  margin-top: 50%;
   position: relative;
   width: auto;
   margin: 10px;
@@ -5260,7 +5261,7 @@ body.modal-open,
 
 @media screen and (min-width: 768px) {
   .modal-dialog {
-    width: 600px;
+    width: 350px;
     margin: 30px auto;
   }
   .modal-content {
