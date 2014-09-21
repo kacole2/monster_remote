@@ -33,7 +33,8 @@ $(function(){
 		     return;
 		  }
 		 document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
-		});
+		}
+	});
 
 });	
 
