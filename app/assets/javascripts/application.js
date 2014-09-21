@@ -16,8 +16,9 @@
 //= require turbolinks
 //= require_tree .
 	
-$(function(){
-$('#FlashModal').modal({
+
+$(document).ready(function(){	
+	$('#FlashModal').modal({
 	"backdrop" : "static"
 });
 
@@ -34,10 +35,6 @@ $('#FlashModal').on('show.bs.modal', function (e) {
 	  }
 	 document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
 	}
-
-});	
-
-$(document).ready(function(){	
 	
 	window.setTimeout(function() {
 		$("#notice").fadeTo(500, 0).slideUp(500, function(){
