@@ -22,7 +22,7 @@ $(function(){
 	});
 
 	$('#FlashModal').on('show.bs.modal', function (e) {
-		var count=30;
+		var count=15;
 		var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
 		
 		function timer(){
@@ -32,8 +32,16 @@ $(function(){
 		     clearInterval(counter);
 		     return;
 		  }
-		 document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+		 document.getElementById("timer").innerHTML=count;
+		 if (count = 0)
+		 {
+		 	$("#FlashModal").modal("hide");
+		 }
 		}
+	});
+	
+	$('#FlashModal').on('hidden.bs.modal', function () {
+    	window.location = window.location.pathname;
 	});
 
 });	
