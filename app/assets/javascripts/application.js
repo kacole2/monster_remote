@@ -16,7 +16,7 @@
 //= require turbolinks
 //= require_tree .
 	
-$(function(){
+
 	$('#FlashModal').modal({
 		"backdrop" : "static"
 	});
@@ -43,8 +43,6 @@ $(function(){
 	$('#FlashModal').on('hidden.bs.modal', function () {
     	window.location = window.location.pathname;
 	});
-
-});	
 
 $(document).ready(function(){	
 	
