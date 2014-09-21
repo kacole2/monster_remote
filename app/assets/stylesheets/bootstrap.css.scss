@@ -5131,8 +5131,9 @@ body.modal-open,
 
 .modal-dialog {
   position: relative;
-  width: auto;
-  margin: 250px 0 0 0;
+  width: 320px;
+  top: 50%;
+  left: 50%;
 }
 
 .modal-content {
