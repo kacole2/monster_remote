@@ -16,17 +16,21 @@
 //= require turbolinks
 //= require_tree .
 
-$('#FlashModal').modal();
+$('#FlashModal').modal({
+		"backdrop" : "static"
+	});
 
-jQuery(document).ready(function() {
-		sec = 15;
-		timer = setInterval(function() {
+$('#FlashModal').on('shownn.bs.modal', function (e) {
+    sec = 15;
+		
+	timer = setInterval(function() {
 	   	$("#mdtimer span").text(sec--);
 	   	if (sec <= 0) {
 			clearInterval("#mdtimer span");
 			sec = 15;}
 		},990);
-	}); 
+});
+
 	
 $(document).ready(function(){	
 
