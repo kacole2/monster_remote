@@ -17,9 +17,9 @@
 //= require_tree .
 
 $(document).ready(function(){	
-	window.setInterval(function () {
-        $("#FlashModal").modal("hide");
-    }, 15000); 
+	//window.setInterval(function () {
+    //    $("#FlashModal").modal("hide");
+    //}, 15000); 
 	
 	jQuery(document).ready(function() {
 		sec = 15;
